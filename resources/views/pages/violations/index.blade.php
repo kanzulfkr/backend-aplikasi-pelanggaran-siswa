@@ -44,7 +44,7 @@
                             <div class="clearfix mb-3"></div>
 
                             <div class="table-responsive">
-                                <table class="table-striped table">
+                                <table class="table-striped mb-0 table">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -53,6 +53,7 @@
                                             <th>Poin</th>
                                             <th>Petugas</th>
                                             <th>Catatan</th>
+                                            <th>Waktu</th>
                                             <th>Validasi</th>
                                             <th>
                                                 <div class="d-flex justify-content-center">
@@ -70,18 +71,17 @@
                                             <td>{{ $violation->point }}</td>
                                             <td>{{ $violation->office_name }}</td>
                                             <td>{{ $violation->catatan }}</td>
+                                            <td>{{ $violation->created_at }}</td>
                                             <td>
                                                 <div class="badge badge-pill {{$violation->is_validate ? 'badge-success' : 'badge-warning' }}  mt-1 mb-1 mr-2">{{$violation->is_validate ? 'Validate' : 'Unvalidate' }}</div>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
-                                                    <a href="{{ route('violations.edit', $violation->id) }}" class="btn btn-sm btn-info btn-icon  mr-2">
-                                                        <i class="fas fa-edit"></i>
-                                                        Edit
+                                                    <a href="{{ route('violations.edit', $violation->id) }}" class="btn btn-primary btn-action mr-1">
+                                                        <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <button class="btn btn-sm btn-danger btn-icon confirm-delete" onclick="deleteConfirmation('{{ route('violations.destroy', $violation->id) }}')">
-                                                        <i class="fas fa-times"></i>
-                                                        Delete
+                                                    <button class="btn btn-danger btn-action" onclick="deleteConfirmation('{{ route('violations.destroy', $violation->id) }}')">
+                                                        <i class="fas fa-trash"></i>
                                                     </button>
                                                     <form id="form-delete" action="{{ route('violations.destroy', $violation->id) }}" method="POST" style="display: none;">
                                                         @csrf

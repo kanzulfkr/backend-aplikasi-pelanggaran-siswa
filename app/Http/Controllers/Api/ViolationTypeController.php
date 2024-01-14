@@ -14,10 +14,12 @@ class ViolationTypeController extends Controller
 
     public function index(Request $request)
     {
-        $violations_types = ViolationsType::all('*');
+        $violations_types = ViolationsType::orderBy('id', 'desc')->get();
+        $total = count($violations_types);
         return response()->json([
             'message' => 'Succes get all data',
-            'data' => $violations_types
+            'total' => $total,
+            'data' => ViolationTypeResource::collection($violations_types)
         ]);
     }
 

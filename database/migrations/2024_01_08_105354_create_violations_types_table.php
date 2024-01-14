@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('violations_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('point');
+            $table->integer('point');
             $table->string('type');
             $table->timestamps();
         });

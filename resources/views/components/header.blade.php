@@ -17,45 +17,16 @@
                     <a href="#">#Stisla</a>
                     <a href="#" class="search-close"><i class="fas fa-times"></i></a>
                 </div>
-                <div class="search-header">
-                    Result
-                </div>
-                <div class="search-item">
-                    <a href="#">
-                        <img class="mr-3 rounded" width="30" src="{{ asset('img/products/product-3-50.png') }}" alt="product">
-                        oPhone S9 Limited Edition
-                    </a>
-                </div>
+
             </div>
         </div>
     </form>
     <ul class="navbar-nav navbar-right">
-        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right">
-                <div class="dropdown-header">Messages
-                    <div class="float-right">
-                        <a href="#">Mark All As Read</a>
-                    </div>
-                </div>
-                <div class="dropdown-list-content dropdown-list-message">
-                    <a href="#" class="dropdown-item dropdown-item-unread">
-                        <div class="dropdown-item-avatar">
-                            <img alt="image" src="{{ asset('img/avatar/avatar-1.png') }}" class="rounded-circle">
-                            <div class="is-online"></div>
-                        </div>
-                        <div class="dropdown-item-desc">
-                            <b>Kusnaedi</b>
-                            <p>Hello, Bro!</p>
-                            <div class="time">10 Hours Ago</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="dropdown-footer text-center">
-                    <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                </div>
-            </div>
-        </li>
-        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+        <li class="dropdown dropdown-list-toggle">
+            <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep">
+                <i class="far fa-bell">
+                </i>
+            </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
                 <div class="dropdown-header">Notifications
                     <div class="float-right">
@@ -64,11 +35,12 @@
                 </div>
                 <div class="dropdown-list-content dropdown-list-icons">
                     <a href="#" class="dropdown-item dropdown-item-unread">
-                        <div class="dropdown-item-icon bg-primary text-white">
-                            <i class="fas fa-code"></i>
+                        <div class="dropdown-item-avatar">
+                            <img alt="image" src="{{ asset('img/avatar/avatar-1.png') }}" class="rounded-circle">
+                            <div class="is-online"></div>
                         </div>
                         <div class="dropdown-item-desc">
-                            Template update is available now!
+                            <strong>Joko</strong> was added <strong>aulia</strong> violation's, validate now!
                             <div class="time text-primary">2 Min Ago</div>
                         </div>
                     </a>

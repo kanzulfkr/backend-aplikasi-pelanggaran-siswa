@@ -21,8 +21,7 @@ class ViolationController extends Controller
             ->join('violations_types', 'violations.violations_types_id', '=', 'violations_types.id')
             ->join('users as student', 'violations.student_id', '=', 'student.id')
             ->join('users as officer', 'violations.officer_id', '=', 'officer.id')
-
-            ->select('violations.id', 'violations.is_validate', 'student.name as student_name', 'officer.name as office_name', 'violations_types.name as violation_name', 'violations_types.point', 'violations.catatan')
+            ->select('violations.id', 'violations.is_validate', 'student.name as student_name', 'officer.name as office_name', 'violations_types.name as violation_name', 'violations_types.point', 'violations.catatan', DB::raw('DATE_FORMAT(violations.created_at, "%d %M %Y") as created_at'))
             ->where('student.name', 'like', '%' . $keyword . '%')
             ->orWhere('violations_types.name', 'like', '%' . $keyword . '%')
             ->paginate(10);
@@ -31,7 +30,7 @@ class ViolationController extends Controller
 
     public function create()
     {
-        $violations_types = ViolationsType::get();
+        $violations_types = ViolationsType::orderBy('point', 'asc')->get();
         $students = User::where('roles', 'siswa')->get();
         $officers = User::where('roles', 'guru')->get();
         $loginUser = Auth::user();

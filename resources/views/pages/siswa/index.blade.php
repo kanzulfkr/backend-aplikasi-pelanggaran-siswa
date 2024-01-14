@@ -76,24 +76,12 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-info btn-icon mr-2">
-                                                    <i class="fas fa-edit"></i>
-                                                    Edit
+                                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary btn-action mr-1">
+                                                    <i class="fas fa-pencil-alt"></i>
                                                 </a>
-
-                                                <button class="btn btn-sm btn-danger btn-icon confirm-delete" onclick="deleteConfirmation('{{ route('user.destroy', $user->id) }}')">
-                                                    <i class="fas fa-times"></i>
-                                                    Delete
+                                                <button class="btn btn-danger btn-action" onclick="deleteConfirmation('{{  route('user.destroy', $user->id) }}')">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
-
-                                                <!-- <form action="{{ route('user.destroy', $user->id) }}" method="POST" class="ml-2">
-                                                    <input type="hidden" name="_method" value="DELETE" />
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                                    <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                        <i class="fas fa-times"></i> Delete
-                                                    </button>
-                                                </form> -->
-
                                                 <form id="form-delete" action="{{ route('user.destroy', $user->id) }}" method="POST" style="display: none;">
                                                     @csrf
                                                     @method('DELETE')

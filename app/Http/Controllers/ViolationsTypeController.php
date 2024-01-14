@@ -18,6 +18,7 @@ class ViolationsTypeController extends Controller
 
             ->select('id', 'name', 'point', 'type')
             ->where('name', 'like', '%' . $name . '%')
+            ->orderBy('point', 'asc')
             ->paginate(10);
 
         return view('pages.violations_type.index', compact('violations_types'));

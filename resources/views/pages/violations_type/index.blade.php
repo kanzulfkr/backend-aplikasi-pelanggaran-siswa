@@ -67,19 +67,16 @@
                                             <td>{{ $violationsType->type }}</td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
-                                                    <a href="{{ route('violations-types.edit', $violationsType->id) }}" class="btn btn-sm btn-info btn-icon mr-2">
-                                                        <i class="fas fa-edit"></i>
-                                                        Edit
+                                                    <a href="{{ route('violations-types.edit', $violationsType->id) }}" class="btn btn-primary btn-action mr-1">
+                                                        <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <button class="btn btn-sm btn-danger btn-icon confirm-delete" onclick="deleteConfirmation('{{ route('violations-types.destroy', $violationsType->id) }}')">
-                                                        <i class="fas fa-times"></i>
-                                                        Delete
+                                                    <button class="btn btn-danger btn-action" onclick="deleteConfirmation('{{  route('violations-types.destroy', $violationsType->id) }}')">
+                                                        <i class="fas fa-trash"></i>
                                                     </button>
                                                     <form id="form-delete" action="{{ route('violations-types.destroy', $violationsType->id) }}" method="POST" style="display: none;">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
-                                                    <!-- <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button> -->
                                                 </div>
                                             </td>
                                         </tr>

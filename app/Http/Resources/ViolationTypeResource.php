@@ -15,8 +15,6 @@ class ViolationTypeResource extends JsonResource
             'name' => $this->name,
             'point' => $this->point,
             'type' => $this->type,
-            'updated_at' => $this->updated_at,
-            'created_at' => $this->created_at,
         ];
     }
 }
