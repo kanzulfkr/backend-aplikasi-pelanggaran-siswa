@@ -44,15 +44,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Nomor Induk</label>
-                            <input type="text" class="form-control @error('identity_number') is-invalid @enderror" name="identity_number">
-                            <div class="invalid-feedback">
-                                @error('identity_number')
-                                {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror" name="password">
@@ -64,17 +56,17 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Roles</label>
-                            <div class="selectgroup w-100">
+                            <div class="selectgroup w-100 @error('roles') is-invalid @enderror">
                                 <label class="selectgroup-item">
-                                    <input type="radio" name="roles" value="admin" class="selectgroup-input" checked="">
+                                    <input type="radio" name="roles" value="1" class="selectgroup-input ">
                                     <span class="selectgroup-button">Admin</span>
                                 </label>
                                 <label class="selectgroup-item">
-                                    <input type="radio" name="roles" value="guru" class="selectgroup-input">
+                                    <input type="radio" name="roles" value="5" class="selectgroup-input">
                                     <span class="selectgroup-button">Guru</span>
                                 </label>
                                 <label class="selectgroup-item">
-                                    <input type="radio" name="roles" value="siswa" class="selectgroup-input">
+                                    <input type="radio" name="roles" value="6" class="selectgroup-input">
                                     <span class="selectgroup-button">Siswa</span>
                                 </label>
                             </div>
@@ -86,11 +78,21 @@
                         </div>
                         <div class="form-group">
                             <label>Phone</label>
-                            <input type="text" class="form-control" name="phone">
+                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone">
+                            <div class="invalid-feedback">
+                                @error('phone')
+                                {{ $message }}
+                                @enderror
+                            </div>
                         </div>
                         <div class="form-group mb-0">
                             <label>Address</label>
-                            <textarea class="form-control" data-height="150" name="address"></textarea>
+                            <textarea class="form-control @error('address') is-invalid @enderror" data-height="150" name="address"></textarea>
+                            <div class="invalid-feedback">
+                                @error('address')
+                                {{ $message }}
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer text-right">

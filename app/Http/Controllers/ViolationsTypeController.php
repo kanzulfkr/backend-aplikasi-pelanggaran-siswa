@@ -12,21 +12,24 @@ class ViolationsTypeController extends Controller
 {
     public function index(Request $request)
     {
-        $name = $request->input('name');
+        $keyword = $request->input('keyword');
 
         $violations_types = DB::table('violations_types')
-
             ->select('id', 'name', 'point', 'type')
-            ->where('name', 'like', '%' . $name . '%')
+            ->where(function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%')
+                    ->orWhere('type', 'like', '%' . $keyword . '%');
+            })
             ->orderBy('point', 'asc')
             ->paginate(10);
 
-        return view('pages.violations_type.index', compact('violations_types'));
+
+        return view('pages.violations_types.index', compact('violations_types'));
     }
 
     public function create()
     {
-        return view('pages.violations_type.create');
+        return view('pages.violations_types.create');
     }
 
     public function store(StoreViolationsTypeRequest $request)
@@ -37,7 +40,7 @@ class ViolationsTypeController extends Controller
 
     public function edit(ViolationsType $violations_type)
     {
-        return view('pages.violations_type.edit')->with('violations_type', $violations_type);
+        return view('pages.violations_types.edit')->with('violations_type', $violations_type);
     }
 
     public function update(UpdateViolationsTypeRequest $request, ViolationsType $violations_type)
@@ -49,7 +52,6 @@ class ViolationsTypeController extends Controller
 
     public function destroy(ViolationsType $violations_type)
     {
-        // dd($violations_type);
         $violations_type->delete();
         return redirect(route('violations-types.index'))->with('success', 'Delete Subject Successfully');
     }

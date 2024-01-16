@@ -25,7 +25,7 @@ class UpdateViolationRequest extends FormRequest
             'violations_types_id' => 'required|exists:violations_types,id',
             'student_id' => 'required|exists:users,id',
             'officer_id' => 'required|exists:users,id',
-            'catatan' => 'string',
+            'catatan' => 'string|nullable',
             'is_validate' => 'required|bool',
         ];
     }

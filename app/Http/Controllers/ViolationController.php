@@ -19,11 +19,13 @@ class ViolationController extends Controller
 
         $violations = DB::table('violations')
             ->join('violations_types', 'violations.violations_types_id', '=', 'violations_types.id')
-            ->join('users as student', 'violations.student_id', '=', 'student.id')
+            ->join('students', 'violations.student_id', '=', 'students.user_id')
+            ->join('users as student', 'students.user_id', '=', 'student.id')
             ->join('users as officer', 'violations.officer_id', '=', 'officer.id')
-            ->select('violations.id', 'violations.is_validate', 'student.name as student_name', 'officer.name as office_name', 'violations_types.name as violation_name', 'violations_types.point', 'violations.catatan', DB::raw('DATE_FORMAT(violations.created_at, "%d %M %Y") as created_at'))
+            ->select('violations.id', 'violations.is_validate', 'student.name as student_name', 'students.nisn', 'officer.name as office_name', 'violations_types.name as violation_name', 'violations_types.point', 'violations.catatan', DB::raw('DATE_FORMAT(violations.created_at, "%d %M %Y") as created_at'))
             ->where('student.name', 'like', '%' . $keyword . '%')
             ->orWhere('violations_types.name', 'like', '%' . $keyword . '%')
+            ->orderBy('id', 'desc')
             ->paginate(10);
         return view('pages.violations.index', compact('violations'));
     }
@@ -31,8 +33,8 @@ class ViolationController extends Controller
     public function create()
     {
         $violations_types = ViolationsType::orderBy('point', 'asc')->get();
-        $students = User::where('roles', 'siswa')->get();
-        $officers = User::where('roles', 'guru')->get();
+        $students = User::where('roles', '6')->get();
+        $officers = User::where('roles', '5')->get();
         $loginUser = Auth::user();
         return view('pages.violations.create', compact('violations_types', 'students', 'officers', 'loginUser'));
     }
@@ -45,10 +47,9 @@ class ViolationController extends Controller
 
     public function edit(Violation $violation)
     {
-        // dd($violations);
         $violations_type = ViolationsType::get();
-        $student = User::where('roles', 'siswa')->get();
-        $officer = User::where('roles', 'guru')->get();
+        $student = User::where('roles', '6')->get();
+        $officer = User::where('roles', '5')->get();
         $loginUser = Auth::user();
         return view('pages.violations.edit', compact('violations_type', 'student', 'officer', 'loginUser'))->with('violation', $violation);
     }
@@ -62,7 +63,6 @@ class ViolationController extends Controller
 
     public function destroy(Violation $violation)
     {
-        // dd($violation);
         $violation->delete();
         return redirect(route('violations.index'))->with('success', 'Delete Violations Successfully');
     }

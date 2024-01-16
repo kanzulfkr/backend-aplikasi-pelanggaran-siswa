@@ -17,8 +17,8 @@ class UserController extends Controller
             ->when($request->input('name'), function ($query, $name) {
                 return $query->where('name', 'like', '%' . $name . '%');
             })
-            ->where('roles', 'like', 'guru')
-            ->select('id', 'name', 'email', 'phone', 'identity_number', 'address', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as created_at'))
+            ->where('roles', 'like', '5')
+            ->select('id', 'name', 'email', 'phone', 'address', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as created_at'))
             ->orderBy('id', 'desc')
             ->paginate(10);
         return view('pages.users.index', compact('users',));
@@ -29,16 +29,12 @@ class UserController extends Controller
         return view('pages.users.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreUserRequest $request)
     {
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'identity_number' => $request['identity_number'],
             'roles' => $request['roles'],
             'phone' => $request['phone'],
             'address' => $request['address'],
@@ -51,17 +47,12 @@ class UserController extends Controller
     {
         return view('pages.users.edit')->with('user', $user);
     }
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateUserRequest $request, User $user)
     {
         $validate = $request->validated();
@@ -69,9 +60,6 @@ class UserController extends Controller
         return redirect(route('user.index'))->with('success', 'Edit User Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(User $user)
     {
         $user->delete();

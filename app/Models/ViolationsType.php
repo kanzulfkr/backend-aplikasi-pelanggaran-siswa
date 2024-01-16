@@ -14,9 +14,4 @@ class ViolationsType extends Model
         'point',
         'type',
     ];
-
-    // public function lecturer()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
 }

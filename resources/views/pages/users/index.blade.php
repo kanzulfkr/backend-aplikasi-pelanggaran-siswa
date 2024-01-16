@@ -49,7 +49,6 @@
                                         <th>Nama</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>NIP</th>
                                         <th>Alamat</th>
                                         <th>
                                             <div class="d-flex justify-content-center">
@@ -68,9 +67,6 @@
                                         </td>
                                         <td>
                                             {{ $user->phone }}
-                                        </td>
-                                        <td>
-                                            {{ $user->identity_number }}
                                         </td>
                                         <td>
                                             {{ $user->address }}

@@ -46,16 +46,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Nomor Induk Siswa</label>
-                            <input type="number" class="form-control @error('identity_number') is-invalid @enderror" name="identity_number" value="{{ $user->identity_number }}">
-                            <div class="invalid-feedback">
-                                @error('identity_number')
-                                {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <label>Nomor Telepon</label>
                             <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}">
                             <div class="invalid-feedback">
@@ -68,15 +58,15 @@
                             <label class="form-label @error('roles') is-invalid @enderror">Roles</label>
                             <div class="selectgroup w-100">
                                 <label class="selectgroup-item">
-                                    <input type="radio" name="roles" value="admin" class="selectgroup-input" @if ($user->roles == 'admin') checked @endif>
+                                    <input type="radio" name="roles" value="1" class="selectgroup-input" @if ($user->roles == '1') checked @endif>
                                     <span class="selectgroup-button">Admin</span>
                                 </label>
                                 <label class="selectgroup-item">
-                                    <input type="radio" name="roles" value="guru" class="selectgroup-input" @if ($user->roles == 'guru') checked @endif>
+                                    <input type="radio" name="roles" value="5" class="selectgroup-input" @if ($user->roles == '5') checked @endif>
                                     <span class="selectgroup-button">Guru</span>
                                 </label>
                                 <label class="selectgroup-item">
-                                    <input type="radio" name="roles" value="siswa" class="selectgroup-input" @if ($user->roles == 'siswa') checked @endif>
+                                    <input type="radio" name="roles" value="6" class="selectgroup-input" @if ($user->roles == '6') checked @endif>
                                     <span class="selectgroup-button">Siswa</span>
                                 </label>
                             </div>

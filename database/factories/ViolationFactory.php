@@ -18,12 +18,6 @@ class ViolationFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'violations_types_id' => ViolationsType::factory(),
-            'student_id' => User::factory(),
-            'officer_id' => User::factory(),
-            'catatan' => $this->faker->paragraph(1),
-            'is_validate' => 0,
-        ];
+        return [];
     }
 }

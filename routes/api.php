@@ -18,10 +18,12 @@ Route::post('/auth/logout',  [AuthController::class, 'logout'])->middleware('aut
 // user controller
 Route::get('/user',  [UserController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/user/point',  [UserController::class, 'point'])->middleware('auth:sanctum');
+Route::get('/student',  [UserController::class, 'student'])->middleware('auth:sanctum');
+Route::get('/teacher',  [UserController::class, 'teacher'])->middleware('auth:sanctum');
 
 // violation controller
 Route::get('/violations', [ViolationController::class, 'index'])->middleware('auth:sanctum');
-Route::get('/violations/all', [ViolationController::class, 'all'])->middleware('auth:sanctum');
+Route::get('/violations/recap', [ViolationController::class, 'recap'])->middleware('auth:sanctum');
 Route::post('/violations/store', [ViolationController::class, 'store'])->middleware('auth:sanctum');
 Route::put('/violations/update/{violation}', [ViolationController::class, 'update'])->middleware('auth:sanctum');
 Route::put('/violations/validation/{violation}', [ViolationController::class, 'validation'])->middleware('auth:sanctum');

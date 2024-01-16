@@ -15,7 +15,6 @@ class Violation extends Model
         'officer_id',
         'catatan',
         'is_validate',
-        // 'created_at',
     ];
 
     public function violationsType()

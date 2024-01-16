@@ -51,6 +51,7 @@
                                             <th>Nama</th>
                                             <th>Pelanggaran</th>
                                             <th>Poin</th>
+                                            <th>NISN</th>
                                             <th>Petugas</th>
                                             <th>Catatan</th>
                                             <th>Waktu</th>
@@ -69,8 +70,9 @@
                                             <td>{{ $violation->student_name }}</td>
                                             <td>{{ $violation->violation_name }}</td>
                                             <td>{{ $violation->point }}</td>
+                                            <td>{{ $violation->nisn }}</td>
                                             <td>{{ $violation->office_name }}</td>
-                                            <td>{{ $violation->catatan }}</td>
+                                            <td>{{ $violation->catatan == null ? '-' : $violation->catatan}}</td>
                                             <td>{{ $violation->created_at }}</td>
                                             <td>
                                                 <div class="badge badge-pill {{$violation->is_validate ? 'badge-success' : 'badge-warning' }}  mt-1 mb-1 mr-2">{{$violation->is_validate ? 'Validate' : 'Unvalidate' }}</div>
