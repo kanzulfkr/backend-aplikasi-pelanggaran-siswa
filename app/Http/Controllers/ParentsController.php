@@ -53,7 +53,7 @@ class ParentsController extends Controller
             'gender' => $request['gender'],
             'job_title' => $request['job_title'],
         ]);
-        return redirect(route('parents.index'))->with('success', 'New Parents Successfully Added');
+        return redirect(route('parents.index'))->with('success', 'Berhasil menambahkan data wali murid');
     }
 
     public function edit(Parents $parent)
@@ -81,7 +81,7 @@ class ParentsController extends Controller
             'job_title' => $request['job_title'],
         ]);
 
-        return redirect(route('parents.index'))->with('success', 'Parents Information Updated');
+        return redirect(route('parents.index'))->with('success', 'Berhasil memperbarui data wali murid');
     }
 
 
@@ -89,6 +89,6 @@ class ParentsController extends Controller
     {
         $parent->delete();
         $parent->user()->delete();
-        return redirect(route('parents.index'))->with('success', 'Delete Parents Successfully');
+        return redirect(route('parents.index'))->with('success', 'Berhasil menghapus data wali murid');
     }
 }

@@ -20,8 +20,10 @@ class ViolationController extends Controller
     {
         $violations = DB::table('violations')
             ->join('violations_types', 'violations.violations_types_id', '=', 'violations_types.id')
-            ->join('users as student', 'violations.student_id', '=', 'student.id')
-            ->join('users as officer', 'violations.officer_id', '=', 'officer.id')
+            ->join('students', 'violations.student_id', '=', 'students.id')
+            ->join('teachers', 'violations.officer_id', '=', 'teachers.id')
+            ->join('users as student', 'students.user_id', '=', 'student.id')
+            ->join('users as officer', 'teachers.user_id', '=', 'officer.id')
             ->select(
                 'violations.id',
                 'student.id as student_id',
@@ -47,13 +49,14 @@ class ViolationController extends Controller
         );
     }
 
-    public function recap(Request $request)
+    public function recap()
     {
-        // $user = $request->user();
         $violations = DB::table('violations')
             ->join('violations_types', 'violations.violations_types_id', '=', 'violations_types.id')
-            ->join('users as student', 'violations.student_id', '=', 'student.id')
-            ->join('users as officer', 'violations.officer_id', '=', 'officer.id')
+            ->join('students', 'violations.student_id', '=', 'students.id')
+            ->join('teachers', 'violations.officer_id', '=', 'teachers.id')
+            ->join('users as student', 'students.user_id', '=', 'student.id')
+            ->join('users as officer', 'teachers.user_id', '=', 'officer.id')
             ->select(
                 'student.id as user_id',
                 'student.name as user_name',
@@ -117,13 +120,17 @@ class ViolationController extends Controller
             $usersData[] = $userData;
         }
 
+        // return response()->json(
+        //     [
+        //         'message' => 'Success get data',
+        //         'total_users' => $totalUser,
+        //         'total_violations' => $totalViolations,
+        //         'data' => $usersData,
+        //     ]
+        // );
         return response()->json(
-            [
-                'message' => 'Success get data',
-                'total_users' => $totalUser,
-                'total_violations' => $totalViolations,
-                'data' => $usersData,
-            ]
+            $usersData,
+
         );
     }
 

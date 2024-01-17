@@ -16,12 +16,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             ViolationsTypeSeeder::class,
-            ViolationSeeder::class,
             StudentSeeder::class,
             TeacherSeeder::class,
+            ViolationSeeder::class,
             ParentSeeder::class,
             ClassNameSeeder::class,
-            ClassNameStudentSeeder::class,
+            StudentClassSeeder::class,
         ]);
     }
 }

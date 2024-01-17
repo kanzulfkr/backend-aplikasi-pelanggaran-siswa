@@ -46,7 +46,7 @@ class StudentController extends Controller
             'nisn' => $request['nisn'],
         ]);
 
-        return redirect(route('students.index'))->with('success', 'New User Successfully Added');
+        return redirect(route('students.index'))->with('success', 'Berhasil menambahkan data siswa');
     }
 
     public function edit(Student $student)
@@ -69,7 +69,7 @@ class StudentController extends Controller
             'nisn' => $request['nisn'],
         ]);
 
-        return redirect(route('students.index'))->with('success', 'User and Student Information Updated');
+        return redirect(route('students.index'))->with('success', 'Berhasil memperbarui data siswa');
     }
 
 
@@ -77,6 +77,6 @@ class StudentController extends Controller
     {
         $student->delete();
         $student->user()->delete();
-        return redirect(route('students.index'))->with('success', 'Delete Students Successfully');
+        return redirect(route('students.index'))->with('success', 'Berhasil menghapus data siswa');
     }
 }

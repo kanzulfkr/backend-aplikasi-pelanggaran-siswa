@@ -51,7 +51,6 @@
                                             <th>Nama</th>
                                             <th>Pelanggaran</th>
                                             <th>Poin</th>
-                                            <th>NISN</th>
                                             <th>Petugas</th>
                                             <th>Catatan</th>
                                             <th>Waktu</th>
@@ -70,7 +69,6 @@
                                             <td>{{ $violation->student_name }}</td>
                                             <td>{{ $violation->violation_name }}</td>
                                             <td>{{ $violation->point }}</td>
-                                            <td>{{ $violation->nisn }}</td>
                                             <td>{{ $violation->office_name }}</td>
                                             <td>{{ $violation->catatan == null ? '-' : $violation->catatan}}</td>
                                             <td>{{ $violation->created_at }}</td>
@@ -78,6 +76,7 @@
                                                 <div class="badge badge-pill {{$violation->is_validate ? 'badge-success' : 'badge-warning' }}  mt-1 mb-1 mr-2">{{$violation->is_validate ? 'Validate' : 'Unvalidate' }}</div>
                                             </td>
                                             <td>
+                                                @if (!$violation->is_validate)
                                                 <div class="d-flex justify-content-center">
                                                     <a href="{{ route('violations.edit', $violation->id) }}" class="btn btn-primary btn-action mr-1">
                                                         <i class="fas fa-pencil-alt"></i>
@@ -90,7 +89,11 @@
                                                         @method('DELETE')
                                                     </form>
                                                 </div>
+                                                @else
+                                                <!-- Do something else or leave empty for no action -->
+                                                @endif
                                             </td>
+
                                         </tr>
                                         @empty
                                         <tr>

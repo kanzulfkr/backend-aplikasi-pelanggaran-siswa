@@ -53,7 +53,7 @@ class TeacherController extends Controller
             'nip' => $request['nip'],
         ]);
 
-        return redirect(route('teachers.index'))->with('success', 'New User Successfully Added');
+        return redirect(route('teachers.index'))->with('success', 'Berhasil menambahkan data guru');
     }
 
     public function edit(Teacher $teacher)
@@ -77,7 +77,7 @@ class TeacherController extends Controller
             'nip' => $request['nip'],
         ]);
 
-        return redirect(route('teachers.index'))->with('success', 'Teacher Information Updated');
+        return redirect(route('teachers.index'))->with('success', 'Berhasil memperbarui data guru');
     }
 
 
@@ -85,6 +85,6 @@ class TeacherController extends Controller
     {
         $teacher->delete();
         $teacher->user()->delete();
-        return redirect(route('teachers.index'))->with('success', 'Delete Teachers Successfully');
+        return redirect(route('teachers.index'))->with('success', 'Berhasil menghapus data guru');
     }
 }

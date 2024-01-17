@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ClassNameStudentSeeder extends Seeder
+class StudentClassSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -46,6 +46,6 @@ class ClassNameStudentSeeder extends Seeder
             ],
 
         ];
-        DB::table('class_name_students')->insert($data);
+        DB::table('student_classes')->insert($data);
     }
 }

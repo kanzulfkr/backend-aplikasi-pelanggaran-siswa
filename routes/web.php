@@ -51,6 +51,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('student-classes', StudentClassController::class);
 });
 
-// Route::middleware(['auth'])->group(function () {
-//     Route::put('generate-qrcode-update/{violations}', [ScheduleController::class, 'generateQrCodeUpdate'])->name('generate-qrcode-update');
-// });
+Route::middleware(['auth'])->group(function () {
+    Route::get('recapitulation}', [StudentClassController::class, 'recapitulation'])->name('recapitulation');
+});

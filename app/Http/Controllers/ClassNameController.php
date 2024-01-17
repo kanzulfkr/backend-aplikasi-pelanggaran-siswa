@@ -19,7 +19,7 @@ class ClassNameController extends Controller
             ->join('teachers', 'class_names.wali_kelas_id', '=', 'teachers.id')
             ->join('users', 'teachers.user_id', '=', 'users.id')
             ->select('class_names.id', 'class_names.name as class_name', 'teachers.nip', 'teachers.gender', 'users.name', 'users.email', 'users.address', 'users.phone', DB::raw('DATE_FORMAT(users.created_at, "%d %M %Y") as created_at'))
-            ->orderBy('class_names.id', 'desc')
+            ->orderBy('class_names.id', 'asc')
             ->paginate(10);
         return view('pages.class_names.index', compact('class_names'));
     }
@@ -37,7 +37,7 @@ class ClassNameController extends Controller
     public function store(StoreClassNameRequest $request)
     {
         ClassName::create($request->all());
-        return redirect()->route('class-names.index')->with('success', 'Subject created succesfully');
+        return redirect()->route('class-names.index')->with('success', 'Berhasil menambahkan data kelas');
     }
 
     public function edit(ClassName $class_name)
@@ -55,12 +55,12 @@ class ClassNameController extends Controller
     {
         $validate = $request->validated();
         $class_name->update($validate);
-        return redirect(route('class-names.index'))->with('success', 'Parents Information Updated');
+        return redirect(route('class-names.index'))->with('success', 'Berhasil memperbarui data kelas');
     }
 
     public function destroy(ClassName $class_name)
     {
         $class_name->delete();
-        return redirect(route('class-names.index'))->with('success', 'Delete Parents Successfully');
+        return redirect(route('class-names.index'))->with('success', 'Berhasil menghapus data kelas');
     }
 }

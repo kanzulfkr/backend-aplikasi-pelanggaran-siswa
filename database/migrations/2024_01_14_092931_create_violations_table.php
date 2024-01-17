@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('violations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('violations_types_id')->constrained('violations_types');
-            $table->foreignId('student_id')->constrained('users');
-            $table->foreignId('officer_id')->constrained('users');
+            $table->foreignId('student_id')->constrained('students');
+            $table->foreignId('officer_id')->constrained('teachers');
             $table->string('catatan')->nullable();
             $table->boolean('is_validate');
             $table->timestamps();

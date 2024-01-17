@@ -57,7 +57,22 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">Logged in 5 min ago</div>
                 <a href="#" class="dropdown-item has-icon">
-                    <i class="far fa-user"></i> {{ auth()->user()->roles }}
+                    <i class="far fa-user" {{ $role = auth()->user()->roles }}></i>
+                    @if ($role == '1')
+                    {{ 'Admin' }}
+                    @elseif ($role == '2')
+                    {{ 'Tata Tertib' }}
+                    @elseif ($role == '3')
+                    {{ 'Wakasek Kesiswaan' }}
+                    @elseif ($role == '4')
+                    {{ 'Wali Kelas' }}
+                    @elseif ($role == '5')
+                    {{ 'Guru' }}
+                    @elseif ($role == '6')
+                    {{ 'Siswa' }}
+                    @elseif ($role == '7')
+                    {{ 'Wali Murid' }}
+                    @endif
                 </a>
                 <a href="#" class="dropdown-item has-icon">
                     <i class="fas fa-bolt"></i> Activities

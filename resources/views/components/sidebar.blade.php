@@ -16,7 +16,7 @@
 
                 </ul>
             </li>
-            <!-- <li class="nav-item dropdown ">
+            <li class="nav-item dropdown ">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-user"></i><span>User</span></a>
                 <ul class="dropdown-menu">
                     <li>
@@ -29,8 +29,8 @@
                         <a class="nav-link" href="{{ route('parents.index') }}">Wali Murid</a>
                     </li>
                 </ul>
-            </li> -->
-            <li class="nav-item dropdown ">
+            </li>
+            <!-- <li class="nav-item dropdown ">
                 <a href="{{ route('teachers.index') }}" class=" nav-link"><i class="fas fa-fire"></i><span>Guru</span></a>
             </li>
             <li class="nav-item dropdown ">
@@ -38,7 +38,7 @@
             </li>
             <li class="nav-item dropdown ">
                 <a href="{{ route('students.index') }}" class=" nav-link"><i class="fas fa-fire"></i><span>Siswa</span></a>
-            </li>
+            </li> -->
             <li class="nav-item dropdown ">
                 <a href="{{ route('violations.index') }}" class=" nav-link"><i class="fas fa-fire"></i><span>Data Pelanggaran</span></a>
             </li>
@@ -53,6 +53,9 @@
             </li>
             <li class="nav-item dropdown ">
                 <a href="{{ route('student-classes.index') }}" class=" nav-link"><i class="fas fa-fire"></i><span>Student Class</span></a>
+            </li>
+            <li class="nav-item dropdown ">
+                <a href="{{ route('recapitulation') }}" class=" nav-link"><i class="fas fa-fire"></i><span>Rekap</span></a>
             </li>
     </aside>
 </div>

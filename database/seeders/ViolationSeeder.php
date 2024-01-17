@@ -17,64 +17,64 @@ class ViolationSeeder extends Seeder
         $data = [
             [
                 'violations_types_id' => 41,
-                'student_id' => 17,
-                'officer_id' => 10,
+                'student_id' => 1,
+                'officer_id' => 7,
                 'catatan' => '',
                 'is_validate' => 0,
                 'created_at' => now()
             ],
             [
                 'violations_types_id' => 40,
-                'student_id' => 24,
-                'officer_id' => 14,
+                'student_id' => 2,
+                'officer_id' => 8,
                 'catatan' => '',
                 'is_validate' => 1,
                 'created_at' => now()
             ],
             [
                 'violations_types_id' => 34,
-                'student_id' => 22,
-                'officer_id' => 8,
+                'student_id' => 1,
+                'officer_id' => 9,
                 'catatan' => '',
                 'is_validate' => 0,
                 'created_at' => now()
             ],
             [
                 'violations_types_id' => 19,
-                'student_id' => 19,
-                'officer_id' => 3,
+                'student_id' => 3,
+                'officer_id' => 10,
                 'catatan' => '',
                 'is_validate' => 0,
                 'created_at' => now()
             ],
             [
                 'violations_types_id' => 1,
-                'student_id' => 25,
-                'officer_id' => 16,
+                'student_id' => 4,
+                'officer_id' => 11,
                 'catatan' => '',
                 'is_validate' => 0,
                 'created_at' => now()
             ],
             [
                 'violations_types_id' => 43,
-                'student_id' => 20,
-                'officer_id' => 9,
-                'catatan' => '',
-                'is_validate' => 1,
-                'created_at' => now()
-            ],
-            [
-                'violations_types_id' => 6,
-                'student_id' => 17,
+                'student_id' => 5,
                 'officer_id' => 12,
                 'catatan' => '',
                 'is_validate' => 1,
                 'created_at' => now()
             ],
             [
+                'violations_types_id' => 6,
+                'student_id' => 6,
+                'officer_id' => 13,
+                'catatan' => '',
+                'is_validate' => 1,
+                'created_at' => now()
+            ],
+            [
                 'violations_types_id' => 23,
-                'student_id' => 23,
-                'officer_id' => 7,
+                'student_id' => 5,
+                'officer_id' => 14,
                 'catatan' => '',
                 'is_validate' => 0,
                 'created_at' => now()

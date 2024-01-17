@@ -34,10 +34,13 @@ class UserController extends Controller
         $user = $request->user();
         $violations = DB::table('violations')
             ->join('violations_types', 'violations.violations_types_id', '=', 'violations_types.id')
-            ->join('users as student', 'violations.student_id', '=', 'student.id')
-            ->join('users as officer', 'violations.officer_id', '=', 'officer.id')
+            ->join('students', 'violations.student_id', '=', 'students.id')
+            ->join('teachers', 'violations.officer_id', '=', 'teachers.id')
+            ->join('users as student', 'students.user_id', '=', 'student.id')
+            ->join('users as officer', 'teachers.user_id', '=', 'officer.id')
             ->select(
                 'violations.id',
+                'student.id as user_id',
                 'student.name as student_name',
                 'officer.name as officer_name',
                 'violations_types.name as violations_types_name',
@@ -47,8 +50,9 @@ class UserController extends Controller
                 'violations.is_validate',
                 'violations.created_at',
             )
-            ->where('student_id', '=', $user->id)
+            ->where('students.user_id', '=', $user->id)
             ->paginate(10);
+
         $violation_total = $violations->total();
         $point_total = 0;
         foreach ($violations as $violation) {

@@ -35,7 +35,7 @@ class ViolationsTypeController extends Controller
     public function store(StoreViolationsTypeRequest $request)
     {
         ViolationsType::create($request->all());
-        return redirect()->route('violations-types.index')->with('success', 'Subject created succesfully');
+        return redirect()->route('violations-types.index')->with('success', 'Berhasil menambahkan data jenis pelanggaran');
     }
 
     public function edit(ViolationsType $violations_type)
@@ -47,12 +47,12 @@ class ViolationsTypeController extends Controller
     {
         $validate = $request->validated();
         $violations_type->update($validate);
-        return redirect(route('violations-types.index'))->with('success', 'Edit Subject Successfully');
+        return redirect(route('violations-types.index'))->with('success', 'Berhasil memperbarui data jenis pelanggaran');
     }
 
     public function destroy(ViolationsType $violations_type)
     {
         $violations_type->delete();
-        return redirect(route('violations-types.index'))->with('success', 'Delete Subject Successfully');
+        return redirect(route('violations-types.index'))->with('success', 'Berhasil menghapus data jenis pelanggaran');
     }
 }
