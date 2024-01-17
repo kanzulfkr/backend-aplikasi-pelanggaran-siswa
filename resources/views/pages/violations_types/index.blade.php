@@ -40,9 +40,7 @@
                                     </div>
                                 </form>
                             </div>
-
                             <div class="clearfix mb-3"></div>
-
                             <div class="table-responsive">
                                 <table class="table-striped table">
                                     <thead>
@@ -59,7 +57,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($violations_types as $violationsType)
+                                        @forelse ($violations_types as $violationsType)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $violationsType->name }}</td>
@@ -80,8 +78,11 @@
                                                 </div>
                                             </td>
                                         </tr>
-
-                                        @endforeach
+                                        @empty
+                                        <tr>
+                                            <td colspan="8" class="text-center">No Data</td>
+                                        </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

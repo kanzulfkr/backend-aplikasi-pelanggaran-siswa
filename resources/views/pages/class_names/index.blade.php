@@ -54,7 +54,7 @@
                                             </div>
                                         </th>
                                     </tr>
-                                    @foreach ($class_names as $class_name)
+                                    @forelse ($class_names as $class_name)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
@@ -81,7 +81,11 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="8" class="text-center">No Data</td>
+                                    </tr>
+                                    @endforelse
                                 </table>
                             </div>
                             <div class="float-right">

@@ -98,6 +98,7 @@
                                 </table>
                             </div>
                             <div class="float-right">
+                                {{ $violations->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>

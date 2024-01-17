@@ -76,13 +76,9 @@
                                         <th>Nama Siswa</th>
                                         <th>NISN</th>
                                         <th>Jenis Kelamin</th>
-                                        <th>
-                                            <div class="d-flex justify-content-center">
-                                                Action
-                                            </div>
-                                        </th>
+                                        <th> Action </th>
                                     </tr>
-                                    @foreach ($student_classes as $student_class)
+                                    @forelse ($student_classes as $student_class)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
@@ -95,21 +91,20 @@
                                             {{ $student_class->gender == 'perempuan' ? 'Perempuan' : 'Laki-laki' }}
                                         </td>
                                         <td>
-                                            <div class="d-flex justify-content-center">
-                                                <a href="{{ route('student-classes.edit', $student_class->id) }}" class="btn btn-primary btn-action mr-1">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
-                                                <button class="btn btn-danger btn-action" onclick="deleteConfirmation('{{  route('student-classes.destroy', $student_class->id) }}')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                                <form id="form-delete" action="{{ route('student-classes.destroy', $student_class->id) }}" method="POST" style="display: none;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
-                                            </div>
+                                            <button class="btn btn-danger btn-action" onclick="deleteConfirmation('{{  route('student-classes.destroy', $student_class->id) }}')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            <form id="form-delete" action="{{ route('student-classes.destroy', $student_class->id) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="8" class="text-center">No Data</td>
+                                    </tr>
+                                    @endforelse
                                 </table>
                             </div>
                             <div class="float-right">

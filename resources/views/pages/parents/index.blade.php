@@ -57,7 +57,7 @@
                                             </div>
                                         </th>
                                     </tr>
-                                    @foreach ($parents as $parent)
+                                    @forelse ($parents as $parent)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
@@ -93,7 +93,11 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="8" class="text-center">No Data</td>
+                                    </tr>
+                                    @endforelse
                                 </table>
                             </div>
                             <div class="float-right">

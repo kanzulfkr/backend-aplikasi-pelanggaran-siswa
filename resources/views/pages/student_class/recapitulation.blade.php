@@ -24,7 +24,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form id="classForm" method="GET" action="{{ route('recapitulation') }}">
+                            <form id="classForm" method="GET" action="{{ route('recapitulation.index') }}">
                                 <div class="badges">
                                     <ul class="nav nav-pills">
                                         @foreach ($className as $class)
@@ -41,17 +41,22 @@
                                     <input type="hidden" id="classIdInput" name="class_id" value="">
                                 </div>
                             </form>
-                            <script>
-                                function updateClassId(classId) {
-                                    document.getElementById('classIdInput').value = classId;
-                                    document.getElementById('classForm').submit();
-                                }
-                            </script>
+                            <div class="clearfix mb-3"></div>
+                            <div class="float-left">
+                                <form id="classFormPrint" method="GET" action="{{ route('recapitulation.print') }}" target="_blank">
+                                    <div class="badges">
+                                        <div class="section-header-button">
+                                            <a class="btn btn-warning" onclick="CetakRekapitulasi()" href="#">Cetak Rekapitulasi</a>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="classIdInputPrint" name="class_id_print" value="{{$classId}}">
+                                </form>
+                            </div>
                             <div class="float-right">
-                                <form method="GET" action="{{ route('recapitulation') }}">
+                                <form method="GET" action="{{ route('recapitulation.index') }}">
                                     <label for="searchInput" class="sr-only">Search</label>
                                     <div class="input-group">
-                                        <input type="hidden" name="class_id" value="{{ request('class_id') }}">
+                                        <input type="hidden" name="class_id" value="{{$classId}}">
                                         <input type="text" class="form-control" id="searchInput" placeholder="Search" name="name">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
@@ -64,23 +69,34 @@
                                 <table class="table-striped table">
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama Siswa</th>
+                                        <th>Nama Siswa </th>
                                         <th>NISN</th>
                                         <th>Total Pelanggaran</th>
-                                        <th>Total Poin</th>
+                                        <th style="width: 15%;">Total Poin</th>
                                         <th>Status</th>
                                         <th>
                                             <div class="d-flex justify-content-center">
                                                 Rincian </div>
                                         </th>
                                     </tr>
-                                    @foreach ($usersData as $userData)
+                                    @forelse ($usersData as $userData)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $userData['name'] }}</td>
                                         <td>{{ $userData['nisn'] }}</td>
                                         <td>{{ $userData['violations_total'] }}</td>
-                                        <td>{{ $userData['point_total'] }}</td>
+                                        <td>
+                                            <div class="mb-4">
+                                                <div class="font-weight-bold mb-1 float-right">{{ $userData['point_total'] }}</div>
+                                                <div class="font-weight-bold mb-1">0</div>
+                                                <div class="progress" data-height="3">
+                                                    @php
+                                                    $percentage = ($userData['point_total'] / 40) * 100;
+                                                    @endphp
+                                                    <div class="progress-bar" role="progressbar" data-width="{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>{{ $userData['status'] }}</td>
                                         <td>
                                             <ul>
@@ -93,7 +109,11 @@
                                             </ul>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="8" class="text-center">No Data</td>
+                                    </tr>
+                                    @endforelse
                                 </table>
                             </div>
                             <div class="float-right">
@@ -105,18 +125,20 @@
         </div>
     </section>
 </div>
+<script>
+    function updateClassId(classId) {
+        document.getElementById('classIdInput').value = classId;
+        document.getElementById('classForm').submit();
+    }
+
+    function CetakRekapitulasi() {
+        document.getElementById('classFormPrint').submit();
+    }
+</script>
 @endsection
 
 @push('scripts')
-<script>
-    function submitForm(classId) {
-        // Set the value of the hidden input to the clicked class id
-        $('#classForm input[name="name"]').val(classId);
 
-        // Submit the form
-        $('#classForm').submit();
-    }
-</script>
 <!-- JS Libraies -->
 <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
 <script src="{{ asset('library/sweetalert/dist/sweetalert.min.js') }}"></script>

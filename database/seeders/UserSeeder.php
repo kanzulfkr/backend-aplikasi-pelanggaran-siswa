@@ -205,13 +205,13 @@ class UserSeeder extends Seeder
                 'created_at' => now()
             ],
             [
-                'name' => 'Yulia Florentina',
-                'email' => 'yulyulfloren@gmail.com',
+                'name' => 'Prisma Jutari',
+                'email' => 'prismarjutari@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('12345678'),
                 'phone' => '081234567802',
                 'roles' => '6',
-                'address' => 'Jl Empu Tantular No. 1',
+                'address' => 'Perum Merjosari malang',
                 'created_at' => now()
             ],
             [

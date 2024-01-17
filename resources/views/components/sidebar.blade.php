@@ -55,7 +55,7 @@
                 <a href="{{ route('student-classes.index') }}" class=" nav-link"><i class="fas fa-fire"></i><span>Student Class</span></a>
             </li>
             <li class="nav-item dropdown ">
-                <a href="{{ route('recapitulation') }}" class=" nav-link"><i class="fas fa-fire"></i><span>Rekap</span></a>
+                <a href="{{ route('recapitulation.index') }}" class=" nav-link"><i class="fas fa-fire"></i><span>Rekap</span></a>
             </li>
     </aside>
 </div>

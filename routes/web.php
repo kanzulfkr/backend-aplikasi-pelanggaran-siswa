@@ -4,6 +4,7 @@ use App\Http\Controllers\ClassNameController;
 use App\Http\Controllers\ViolationController;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\ParentsController;
+use App\Http\Controllers\RecapitulationController;
 use App\Http\Controllers\StudentClassController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
@@ -52,5 +53,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('recapitulation}', [StudentClassController::class, 'recapitulation'])->name('recapitulation');
+    Route::resource('recapitulation', RecapitulationController::class)->only(['index']);
+    Route::get('recapitulation/print', [RecapitulationController::class, 'print'])->name('recapitulation.print');
+    Route::get('recapitulation/ayang', [RecapitulationController::class, 'ayang'])->name('recapitulation.ayang');
 });
