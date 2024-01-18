@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <title>@yield('title') &dash; Aplikasi Pelanggaran Siswa</title>
+    <link rel="icon" type="image/x-icon" href="https://malasid.github.io/favicon.png">
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">

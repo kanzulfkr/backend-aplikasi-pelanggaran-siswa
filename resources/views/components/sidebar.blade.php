@@ -37,7 +37,7 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Kelas</span></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="{{ route('class-names.index') }}" class=" nav-link">Jenis Kelas</a>
+                        <a href="{{ route('class-names.index') }}" class=" nav-link">Daftar Kelas</a>
                     </li>
                     <li>
                         <a href="{{ route('student-classes.index') }}" class=" nav-link">Kelas</a>

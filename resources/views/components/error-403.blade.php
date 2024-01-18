@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>@yield('title') &mdash; Stisla</title>
+    <title>403</title>
     <link rel="icon" type="image/x-icon" href="https://malasid.github.io/favicon.png">
 
     <!-- General CSS Files -->
@@ -39,7 +39,44 @@
             <div class="container mt-5">
                 <!-- Content -->
                 @yield('main')
+                <section class="section">
+                    <div class="container mt-5">
+                        <div class="page-error">
+                            <div class="page-inner">
+                                <h1>403</h1>
+                                <div class="page-description">
+                                    You do not have access to this page.
+                                </div>
+                                <div class="page-search">
+                                    <form>
+                                        <div class="form-group floating-addon floating-addon-not-append">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-search"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Search">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary btn-lg">
+                                                        Search
+                                                    </button>
+                                                </div>
 
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="mt-3">
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Back to Home</a>
+                                    </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <!-- Footer -->
                 @include('components.error-footer')
             </div>
