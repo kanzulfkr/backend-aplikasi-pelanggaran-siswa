@@ -46,10 +46,10 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Jenis Pelanggaran</th>
-                                            <th>Poin</th>
+                                            <th style="width: 60%;">Jenis Pelanggaran</th>
+                                            <th style="width: 10%;">Poin</th>
                                             <th>Tipe</th>
-                                            <th>
+                                            <th style="width: 20%;">
                                                 <div class="d-flex justify-content-center">
                                                     Action
                                                 </div>

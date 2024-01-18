@@ -10,13 +10,11 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ViolationsTypeController;
 use App\Http\Controllers\UserController;
-use App\Models\ClassName;
 use Illuminate\Support\Facades\Route;
 
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return view('pages.app.dashboard');
-    });
+    Route::get('/', [UserController::class, 'dashboard'])->name('/');
     Route::resource('user', UserController::class);
 });
 

@@ -72,6 +72,7 @@
                                         <th>Nama Siswa </th>
                                         <th>NISN</th>
                                         <th>Total Pelanggaran</th>
+                                        <!-- <th>Total Poin</th> -->
                                         <th style="width: 15%;">Total Poin</th>
                                         <th>Status</th>
                                         <th>
@@ -86,15 +87,26 @@
                                         <td>{{ $userData['nisn'] }}</td>
                                         <td>{{ $userData['violations_total'] }}</td>
                                         <td>
-                                            <div class="mb-4">
-                                                <div class="font-weight-bold mb-1 float-right">{{ $userData['point_total'] }}</div>
-                                                <div class="font-weight-bold mb-1">0</div>
-                                                <div class="progress" data-height="3">
-                                                    @php
-                                                    $percentage = ($userData['point_total'] / 40) * 100;
-                                                    @endphp
-                                                    <div class="progress-bar" role="progressbar" data-width="{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="media-progressbar">
+                                                @php
+                                                $maxPoints = 40;
+                                                $points = $userData['point_total'];
+                                                $progressPercentage = min($points * 100 / $maxPoints, 100);
+                                                $isMaxPoints = $points >= $maxPoints;
+
+                                                if ($progressPercentage >= 100) {
+                                                $barColorClass = 'bg-danger';
+                                                } elseif ($progressPercentage >= 50) {
+                                                $barColorClass = 'bg-warning';
+                                                } else {
+                                                $barColorClass='bg-primary' ;
+                                                }
+                                                @endphp
+                                                <div class="progress-text">{{$points }}</div>
+                                                <div class="progress" data-height="6">
+                                                    <div class="progress-bar {{ $barColorClass   }}" data-width=" {{ ($points/40)*100 }}%"></div>
                                                 </div>
+                                                <div class="progress-text">{{ $progressPercentage }}%</div>
                                             </div>
                                         </td>
                                         <td>{{ $userData['status'] }}</td>

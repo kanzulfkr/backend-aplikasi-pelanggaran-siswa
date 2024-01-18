@@ -14,4 +14,8 @@ class ViolationsType extends Model
         'point',
         'type',
     ];
+    public function violation()
+    {
+        return $this->belongsToMany(Violation::class);
+    }
 }

@@ -15,20 +15,22 @@ class Violation extends Model
         'officer_id',
         'catatan',
         'is_validate',
+        'created_at' => 'datetime',
     ];
+
 
     public function violationsType()
     {
-        return $this->belongsTo(ViolationsType::class);
+        return $this->belongsTo(ViolationsType::class, 'violations_types_id');
     }
 
     public function student()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Student::class);
     }
 
     public function officer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Teacher::class);
     }
 }
