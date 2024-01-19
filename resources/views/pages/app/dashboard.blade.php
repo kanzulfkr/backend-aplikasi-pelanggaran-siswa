@@ -37,7 +37,7 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Data Pelanggaran Validate</h4>
+                            <h4>Data Pelanggaran Ter-Validasi</h4>
                         </div>
                         <div class="card-body">
                             <h5>{{ $totalsData['violationValidate'] }}</h5>
@@ -47,12 +47,12 @@
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-primary">
+                    <div class="card-icon bg-warning">
                         <i class="far fa-user"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Data Pelanggaran Un-Validate</h4>
+                            <h4>Data Pelanggaran Belum Validasi</h4>
                         </div>
                         <div class="card-body">
                             <h5>{{ $totalsData['violationUnValidate'] }}</h5>
@@ -62,7 +62,7 @@
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-warning">
+                    <div class="card-icon bg-primary">
                         <i class="fas fa-file"></i>
                     </div>
                     <div class="card-wrap">

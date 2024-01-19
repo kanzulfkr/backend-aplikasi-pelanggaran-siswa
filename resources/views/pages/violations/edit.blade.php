@@ -32,7 +32,7 @@
                             <select class="form-control select2 @error('student_id') is-invalid @enderror" name="student_id">
                                 <option value="">Pilih Siswa</option>
                                 @foreach ($student as $student)
-                                <option value="{{ $student->id }}" @if ($student->id == $violation->student_id) selected @endif>{{ $student->name }}</option>
+                                <option value="{{ $student->id }}" @if ($student->id == $violation->student_id) selected @endif>{{ $student->user->name }}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -41,6 +41,33 @@
                                 @enderror
                             </div>
                         </div>
+                        @if (auth()->user()->roles == '1 ')
+                        <div class="form-group">
+                            <label>Petugas</label>
+                            <select class="form-control select2 @error('officer_id') is-invalid @enderror" name="officer_id">
+                                <option value="">Pilih Petugas</option>
+                                @foreach ($officer as $officer)
+                                <option value="{{ $officer->id }}" @if ($officer->id == $violation->officer_id) selected @endif>{{ $officer->user->name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                @error('officer_id')
+                                {{ $message }}
+                                @enderror
+                            </div>
+                        </div>
+                        @elseif (in_array(auth()->user()->roles, ['2', '3', '4','5']))
+                        <div class="form-group">
+                            <label>Petugas</label>
+                            <input type="text" class="form-control @error('officer_id') is-invalid @enderror" name="officer_id" value="{{$violation->officer->user->name}}" readonly>
+                            <input type="hidden" name="officer_id" value="{{ $loginUser->id }}">
+                            <div class="invalid-feedback">
+                                @error('officer_id')
+                                {{ $message }}
+                                @enderror
+                            </div>
+                        </div>
+                        @endif
                         <div class="form-group">
                             <label>Jenis Pelanggaran</label>
                             <select class="form-control select2 @error('violations_types_id') is-invalid @enderror" name="violations_types_id">
@@ -51,20 +78,6 @@
                             </select>
                             <div class="invalid-feedback">
                                 @error('violations_types_id')
-                                {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Petugas</label>
-                            <select class="form-control select2 @error('officer_id') is-invalid @enderror" name="officer_id">
-                                <option value="">Pilih Petugas</option>
-                                @foreach ($officer as $officer)
-                                <option value="{{ $officer->id }}" @if ($officer->id == $violation->officer_id) selected @endif>{{ $officer->name }}</option>
-                                @endforeach
-                            </select>
-                            <div class="invalid-feedback">
-                                @error('officer_id')
                                 {{ $message }}
                                 @enderror
                             </div>

@@ -23,8 +23,8 @@ class UpdateViolationRequest extends FormRequest
     {
         return [
             'violations_types_id' => 'required|exists:violations_types,id',
-            'student_id' => 'required|exists:users,id',
-            'officer_id' => 'required|exists:users,id',
+            'student_id' => 'required|exists:students,id',
+            'officer_id' => 'required|exists:teachers,id',
             'catatan' => 'string|nullable',
             'is_validate' => 'required|bool',
         ];

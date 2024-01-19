@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreViolationRequest;
 use App\Http\Requests\UpdateViolationRequest;
+use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 use App\Models\Violation;
 use App\Models\ViolationsType;
@@ -33,21 +35,13 @@ class ViolationController extends Controller
 
     public function create()
     {
+        $auth = Auth::user();
+        $students = Student::all();
+        $officers = Teacher::all();
+        $loginUser = Teacher::where('user_id', '=', $auth->id)->first();
         $violations_types = ViolationsType::orderBy('point', 'asc')->get();
-        // $students = User::where('roles', '6')->get();
-        // $officers = User::where('roles', '5')->get();
-        $students =  DB::table('students')
-            ->join('users', 'students.user_id', '=', 'users.id')
-            ->select('users.name', 'students.id', 'students.user_id as student_id')
-            ->paginate(10);
-        $officers =  DB::table('teachers')
-            ->join('users', 'teachers.user_id', '=', 'users.id')
-            ->select('users.name', 'teachers.id', 'teachers.user_id as student_id')
-            ->where('roles', '=', 2)
-            ->orWhere('roles', '=', 5)
-            ->paginate(10);
-        $loginUser = Auth::user();
-        return view('pages.violations.create', compact('violations_types', 'students', 'officers', 'loginUser'));
+
+        return view('pages.violations.create', compact('loginUser', 'students', 'officers', 'violations_types'));
     }
 
     public function store(StoreViolationRequest $request)
@@ -58,20 +52,11 @@ class ViolationController extends Controller
 
     public function edit(Violation $violation)
     {
+        $auth = Auth::user();
+        $student = Student::all();
+        $officer = Teacher::all();
         $violations_type = ViolationsType::get();
-        // $student = User::where('roles', '6')->get();
-        // $officer = User::where('roles', '5')->get();
-        $student =  DB::table('students')
-            ->join('users', 'students.user_id', '=', 'users.id')
-            ->select('users.name', 'students.id', 'students.user_id as student_id')
-            ->paginate(10);
-        $officer =  DB::table('teachers')
-            ->join('users', 'teachers.user_id', '=', 'users.id')
-            ->select('users.name', 'teachers.id', 'teachers.user_id as student_id')
-            ->where('roles', '=', 2)
-            ->orWhere('roles', '=', 5)
-            ->paginate(10);
-        $loginUser = Auth::user();
+        $loginUser = Teacher::where('user_id', '=', $auth->id)->first();
         return view('pages.violations.edit', compact('violations_type', 'student', 'officer', 'loginUser'))->with('violation', $violation);
     }
 
