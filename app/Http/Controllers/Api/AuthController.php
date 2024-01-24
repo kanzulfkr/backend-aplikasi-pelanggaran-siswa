@@ -51,14 +51,14 @@ class AuthController extends Controller
         ]);
     }
 
-    public function user(Request $request)
-    {
-        $user = $request->user();
-        return response()->json(
-            [
-                'message' => 'Get data user successfully',
-                'data' => new UserResource($user),
-            ]
-        );
-    }
+    // public function user(Request $request)
+    // {
+    //     $user = $request->user();
+    //     return response()->json(
+    //         [
+    //             'message' => 'Get data user successfully',
+    //             'data' => new UserResource($user),
+    //         ]
+    //     );
+    // }
 }

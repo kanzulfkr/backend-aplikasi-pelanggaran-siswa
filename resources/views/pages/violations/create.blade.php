@@ -91,8 +91,6 @@
                             </div>
                         </div>
                         <input type="hidden" class="form-control" name="is_validate" value="0">
-                        <input type="hidden" name="created_by" value="{{ $loginUser->id }}">
-                        <input type="hidden" name="updated_by" value="{{ $loginUser->id }}">
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">Submit</button>

@@ -12,24 +12,25 @@ class TeacherResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'roles' => $this->roles,
             'nip' => $this->nip,
-            'jabatan' => $this->mapRole($this->roles),
             'phone' => $this->phone,
             'gender' => $this->gender,
             'address' => $this->address,
+            // 'jabatan' => $this->mapRole($this->roles),
         ];
     }
 
-    protected function mapRole($role)
-    {
-        $roleMapping = [
-            2 => 'Tata Tertib',
-            3 => 'Wakasek Kesiswaan',
-            4 => 'Wali Kelas',
-            5 => 'Guru',
-            // Add more mappings as needed
-        ];
+    // protected function mapRole($role)
+    // {
+    //     $roleMapping = [
+    //         2 => 'Tata Tertib',
+    //         3 => 'Wakasek Kesiswaan',
+    //         4 => 'Wali Kelas',
+    //         5 => 'Guru',
+    //         // Add more mappings as needed
+    //     ];
 
-        return $roleMapping[$role] ?? 'asd';
-    }
+    //     return $roleMapping[$role] ?? 'asd';
+    // }
 }
