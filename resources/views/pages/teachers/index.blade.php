@@ -46,6 +46,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Nama</th>
+                                        <th>Email</th>
                                         <th>NIP</th>
                                         <th>Gender</th>
                                         <th>Phone</th>
@@ -62,6 +63,9 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             {{ $teacher->name }}
+                                        </td>
+                                        <td>
+                                            {{ $teacher->email }}
                                         </td>
                                         <td>
                                             {{ $teacher->nip }}

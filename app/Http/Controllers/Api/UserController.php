@@ -15,33 +15,6 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    // public function index(Request $request)
-    // {
-    //     $loginUserId = $request->user()->id;
-    //     $loginUserRole = $request->user()->roles;
-
-    //     $student = User::join('students', 'students.user_id', '=', 'users.id')
-    //         ->select('students.gender', 'students.nisn', 'users.name', 'users.id', 'users.email', 'users.phone', 'users.address', 'users.roles')
-    //         ->where('students.user_id', $loginUserId)
-    //         ->first();
-    //     $teacher = User::join('teachers', 'teachers.user_id', '=', 'users.id')
-    //         ->select('teachers.gender', 'teachers.nip', 'users.name', 'users.id', 'users.email', 'users.phone', 'users.address', 'users.roles')
-    //         ->where('teachers.user_id', $loginUserId)
-    //         ->first();
-    //     $parent = Parents::join('users', 'parents.user_id', '=', 'users.id')
-    //         ->join('students', 'parents.student_id', '=', 'students.id')
-    //         ->join('users as US', 'students.user_id', '=', 'US.id')
-    //         ->select('parents.gender', 'US.name as student_name', 'parents.job_title', 'parents.student_id', 'users.name', 'users.id', 'users.email', 'users.phone', 'users.address', 'users.roles')
-    //         ->where('parents.user_id', $loginUserId)
-    //         ->first();
-    //     $user = User::all()
-    //         ->where('id', $loginUserId)
-    //         ->first();
-    //     return response()->json([
-    //         'message' => 'Get data user successfully',
-    //         'data' => new StudentResource($student),
-    //     ]);
-    // }
 
     public function index(Request $request)
     {
@@ -97,31 +70,69 @@ class UserController extends Controller
     public function point(Request $request)
     {
         $user = $request->user();
-        $violations = DB::table('violations')
-            ->join('violations_types', 'violations.violations_types_id', '=', 'violations_types.id')
-            ->join('students', 'violations.student_id', '=', 'students.id')
-            ->join('teachers', 'violations.officer_id', '=', 'teachers.id')
-            ->join('users as student', 'students.user_id', '=', 'student.id')
-            ->join('users as officer', 'teachers.user_id', '=', 'officer.id')
-            ->select(
-                'violations.id',
-                'student.id as user_id',
-                'student.name as student_name',
-                'officer.name as officer_name',
-                'violations_types.name as violations_types_name',
-                'violations_types.point',
-                'violations_types.type',
-                'violations.catatan',
-                'violations.is_validate',
-                'violations.created_at',
-            )
-            ->where('students.user_id', '=', $user->id)
-            ->paginate(10);
+
+        $parents = DB::table('parents')
+            ->where('parents.user_id', '=', $user->id)
+            ->join('students', 'parents.student_id', '=', 'students.id')
+            ->join('users', 'students.user_id', '=', 'users.id')
+            ->select('*')
+            ->get();
+        foreach ($parents as $parent) {
+            $parentsStudentId = $parent->id;
+        }
+
+        if ($user->roles == '7') {
+            $violations = DB::table('violations')
+                ->join('violations_types', 'violations.violations_types_id', '=', 'violations_types.id')
+                ->join('students', 'violations.student_id', '=', 'students.id')
+                ->join('teachers', 'violations.officer_id', '=', 'teachers.id')
+                ->join('users as student', 'students.user_id', '=', 'student.id')
+                ->join('users as officer', 'teachers.user_id', '=', 'officer.id')
+                ->select(
+                    'violations.id',
+                    'student.id as user_id',
+                    'student.name as student_name',
+                    'officer.name as officer_name',
+                    'violations_types.name as violations_types_name',
+                    'violations_types.point',
+                    'violations_types.type',
+                    'violations.catatan',
+                    'violations.is_validate',
+                    'violations.created_at',
+                )
+                ->where('students.user_id', '=', $parentsStudentId)
+                ->paginate(10);
+        } else {
+            $violations = DB::table('violations')
+                ->join('violations_types', 'violations.violations_types_id', '=', 'violations_types.id')
+                ->join('students', 'violations.student_id', '=', 'students.id')
+                ->join('teachers', 'violations.officer_id', '=', 'teachers.id')
+                ->join('users as student', 'students.user_id', '=', 'student.id')
+                ->join('users as officer', 'teachers.user_id', '=', 'officer.id')
+                ->select(
+                    'violations.id',
+                    'student.id as user_id',
+                    'student.name as student_name',
+                    'officer.name as officer_name',
+                    'violations_types.name as violations_types_name',
+                    'violations_types.point',
+                    'violations_types.type',
+                    'violations.catatan',
+                    'violations.is_validate',
+                    'violations.created_at',
+                )
+                ->where('students.user_id', '=', $user->id)
+                ->paginate(10);
+        }
 
         $violation_total = $violations->total();
         $point_total = 0;
+        $user_id = 0;
+        $student_name = '';
         foreach ($violations as $violation) {
             $point_total += $violation->point;
+            $user_id  = $violation->user_id;
+            $student_name  = $violation->student_name;
         }
 
         if ($point_total < 5) {
@@ -148,12 +159,14 @@ class UserController extends Controller
                     break;
             }
         }
+        // return  $parents;
+
         return response()->json(
             [
                 'message' => 'Success get data',
-                'data' => [
-                    'user_id' => $user->id,
-                    'name' => $user->name,
+                'point' => [
+                    'user_id' => $user_id,
+                    'name' => $student_name,
                     'violation_total' => $violation_total,
                     'point_total' => $point_total,
                     'status' => $status,
