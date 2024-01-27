@@ -70,7 +70,6 @@ class UserController extends Controller
     public function point(Request $request)
     {
         $user = $request->user();
-
         $parents = DB::table('parents')
             ->where('parents.user_id', '=', $user->id)
             ->join('students', 'parents.student_id', '=', 'students.id')
@@ -79,6 +78,7 @@ class UserController extends Controller
             ->get();
         foreach ($parents as $parent) {
             $parentsStudentId = $parent->id;
+            $parentsStudent = $parent->name;
         }
 
         if ($user->roles == '7') {
@@ -135,32 +135,41 @@ class UserController extends Controller
             $student_name  = $violation->student_name;
         }
 
-        if ($point_total < 5) {
-            $status = 'aman ajah';
+        //ketika data pelanggaran null, maka ambil data dari user login
+        if ($user->roles == '7') {
+            if ($student_name == '' && $user_id == 0) {
+                $user_id = $parentsStudentId;
+                $student_name = $parentsStudent;
+            }
         } else {
-            switch (true) {
-                case ($point_total <= 10):
-                    $status = 'Pembinaan';
-                    break;
-                case ($point_total <= 15):
-                    $status = 'Panggilan orang tua ke-1 dan surat peringatan';
-                    break;
-                case ($point_total <= 22):
-                    $status = 'Panggilan orang tua ke-2 dan surat peringatan bermaterai';
-                    break;
-                case ($point_total <= 30):
-                    $status = 'Panggilan Orang Tua ke-3 dan Scorsing I selama 3 hari';
-                    break;
-                case ($point_total <= 39):
-                    $status = 'Panggilan Orang Tua Ke-4 dan Scorsing II selama 1 minggu';
-                    break;
-                default:
-                    $status = 'Panggilan orang tua dan siswa dikembalikan ke orang tua selamanya. Dan sekolah memberikan kesempatan untuk mutasi sekolah';
-                    break;
+            if ($student_name == '' && $user_id == 0) {
+                $user_id = $user->id;
+                $student_name = $user->name;
             }
         }
-        // return  $parents;
-
+        switch (true) {
+            case ($point_total <= 5):
+                $status = '-';
+                break;
+            case ($point_total <= 10):
+                $status = 'Pembinaan';
+                break;
+            case ($point_total <= 15):
+                $status = 'Panggilan orang tua ke-1 dan surat peringatan';
+                break;
+            case ($point_total <= 22):
+                $status = 'Panggilan orang tua ke-2 dan surat peringatan bermaterai';
+                break;
+            case ($point_total <= 30):
+                $status = 'Panggilan Orang Tua ke-3 dan Scorsing I selama 3 hari';
+                break;
+            case ($point_total <= 39):
+                $status = 'Panggilan Orang Tua Ke-4 dan Scorsing II selama 1 minggu';
+                break;
+            default:
+                $status = 'Panggilan orang tua dan siswa dikembalikan ke orang tua selamanya. Dan sekolah memberikan kesempatan untuk mutasi sekolah';
+                break;
+        }
         return response()->json(
             [
                 'message' => 'Success get data',
