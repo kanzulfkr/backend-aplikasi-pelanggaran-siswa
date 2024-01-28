@@ -190,12 +190,12 @@ class UserController extends Controller
     {
         $students = DB::table('students')
             ->join('users', 'students.user_id', '=', 'users.id')
-            ->select('*')
+            ->select('users.id as user_id', 'students.id as student_id', 'students.gender', 'students.nisn', 'users.name', 'users.email', 'users.roles', 'users.phone', 'users.address',)
             ->get();
         return response()->json(
             [
-                'message' => 'Success get data',
-                'data' => StudentResource::collection($students)
+                'message' => 'Success get student',
+                'student' => StudentResource::collection($students),
             ]
         );
     }
@@ -204,12 +204,14 @@ class UserController extends Controller
     {
         $teachers = DB::table('teachers')
             ->join('users', 'teachers.user_id', '=', 'users.id')
-            ->select('*')
+            ->select('users.id as user_id', 'teachers.id as teacher_id', 'teachers.gender', 'teachers.nip', 'users.name', 'users.email', 'users.roles', 'users.phone', 'users.address',)
+
             ->get();
         return response()->json(
+
             [
-                'message' => 'Success get data',
-                'data' => TeacherResource::collection($teachers)
+                'message' => 'Success get student',
+                'teacher' => TeacherResource::collection($teachers)
             ]
         );
     }

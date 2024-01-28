@@ -16,11 +16,13 @@ class ViolationTypeController extends Controller
     {
         $violations_types = ViolationsType::orderBy('id', 'desc')->get();
         $total = count($violations_types);
-        return response()->json([
-            'message' => 'Succes get all data',
-            'total' => $total,
-            'data' => ViolationTypeResource::collection($violations_types)
-        ]);
+        return response()->json(
+            [
+                'message' => 'Succes get all data',
+                'violation-types' =>
+                ViolationTypeResource::collection($violations_types)
+            ]
+        );
     }
 
     public function store(StoreViolationsTypeRequest $request)
