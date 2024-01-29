@@ -38,8 +38,9 @@ class ViolationController extends Controller
                 'violations.is_validate',
                 'violations.created_at'
             )
-            ->paginate(10);
-        $total = $violations->total();
+            ->orderBy('id', 'desc')
+            ->get();
+        $total = $violations->count();
         return response()->json(
             [
                 'message' => 'Success get data',

@@ -30,7 +30,7 @@ class UserController extends Controller
             ]);
         } elseif (in_array($loginUserRole, [2, 3, 4, 5])) {
             $teacher = User::join('teachers', 'teachers.user_id', '=', 'users.id')
-                ->select('teachers.gender', 'teachers.nip', 'users.name', 'users.id', 'users.email', 'users.phone', 'users.address', 'users.roles')
+                ->select('teachers.id as teacher_id', 'teachers.user_id as user_id', 'teachers.gender', 'teachers.nip', 'users.name', 'users.id', 'users.email', 'users.phone', 'users.address', 'users.roles')
                 ->where('teachers.user_id', $loginUserId)
                 ->first();
 
@@ -40,7 +40,7 @@ class UserController extends Controller
             ]);
         } elseif ($loginUserRole == 6) {
             $student = User::join('students', 'students.user_id', '=', 'users.id')
-                ->select('students.gender', 'students.nisn', 'users.name', 'users.id', 'users.email', 'users.phone', 'users.address', 'users.roles')
+                ->select('students.id as student_id', 'students.user_id as user_id', 'students.gender', 'students.nisn', 'users.name', 'users.id', 'users.email', 'users.phone', 'users.address', 'users.roles')
                 ->where('students.user_id', $loginUserId)
                 ->first();
 
