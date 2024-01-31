@@ -26,9 +26,9 @@ class ViolationController extends Controller
             ->join('users as officer', 'teachers.user_id', '=', 'officer.id')
             ->select(
                 'violations.id',
-                'student.id as student_id',
+                'students.id as student_id',
                 'student.name as student_name',
-                'officer.id as officer_id',
+                'teachers.id as officer_id',
                 'officer.name as officer_name',
                 'violations_types.id as violations_types_id',
                 'violations_types.name as violation_name',
