@@ -93,7 +93,7 @@ class RecapitulationController extends Controller
         $className = DB::table('class_names')->select('name', 'id')->paginate(10);
         $classIdByRequest = DB::table('student_classes')->whereIn('student_id', $cns)->select('class_name_id')->first();
         $toArray = $classIdByRequest ? (array) $classIdByRequest : null;
-        $classId = $toArray['class_name_id'];
+        $classId = $toArray == '' ? null : $toArray['class_name_id'];
         return view('pages.student_class.recapitulation ', compact('student_class', 'className', 'usersData', 'violations', 'classId'));
     }
 

@@ -93,6 +93,7 @@ class UserController extends Controller
                     'student.id as user_id',
                     'student.name as student_name',
                     'officer.name as officer_name',
+                    'students.nisn',
                     'violations_types.name as violations_types_name',
                     'violations_types.point',
                     'violations_types.type',
@@ -114,6 +115,7 @@ class UserController extends Controller
                     'student.id as user_id',
                     'student.name as student_name',
                     'officer.name as officer_name',
+                    'students.nisn',
                     'violations_types.name as violations_types_name',
                     'violations_types.point',
                     'violations_types.type',
@@ -129,10 +131,12 @@ class UserController extends Controller
         $point_total = 0;
         $user_id = 0;
         $student_name = '';
+        $nisn = '';
         foreach ($violations as $violation) {
             $point_total += $violation->point;
             $user_id  = $violation->user_id;
             $student_name  = $violation->student_name;
+            $nisn  = $violation->nisn;
         }
 
         //ketika data pelanggaran null, maka ambil data dari user login
@@ -176,6 +180,7 @@ class UserController extends Controller
                 'point' => [
                     'user_id' => $user_id,
                     'name' => $student_name,
+                    'nisn' => $nisn,
                     'violation_total' => $violation_total,
                     'point_total' => $point_total,
                     'status' => $status,

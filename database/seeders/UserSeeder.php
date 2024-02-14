@@ -175,8 +175,8 @@ class UserSeeder extends Seeder
                 'created_at' => now()
             ],
             [
-                'name' => 'Ines Kumalasari',
-                'email' => 'ines@gmail.com',
+                'name' => 'Putri',
+                'email' => 'putri@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('12345678'),
                 'phone' => '081234567897',
