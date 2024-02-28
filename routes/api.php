@@ -27,6 +27,7 @@ Route::get('/violations/recap', [ViolationController::class, 'recap'])->middlewa
 Route::post('/violations/store', [ViolationController::class, 'store'])->middleware('auth:sanctum');
 Route::put('/violations/update/{violation}', [ViolationController::class, 'update'])->middleware('auth:sanctum');
 Route::put('/violations/validation/{violation}', [ViolationController::class, 'validation'])->middleware('auth:sanctum');
+Route::put('/violations/confirmation/{violation}', [ViolationController::class, 'confirmation'])->middleware('auth:sanctum');
 Route::delete('/violations/delete/{violation}', [ViolationController::class, 'destroy'])->middleware('auth:sanctum');
 
 // violations-types controller

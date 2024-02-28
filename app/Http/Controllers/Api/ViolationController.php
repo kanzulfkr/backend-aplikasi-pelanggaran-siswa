@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreViolationRequest;
+use App\Http\Requests\UpdateConfirmationRequest;
 use App\Http\Requests\UpdateValidationRequest;
 use App\Http\Requests\UpdateViolationRequest;
 use App\Http\Resources\ViolationCompleteResource;
@@ -168,6 +169,18 @@ class ViolationController extends Controller
             [
                 'message' => 'Success validate data',
                 'data' => $violation->is_validate
+            ]
+        );
+    }
+    public function confirmation(UpdateConfirmationRequest $request, Violation $violation)
+    {
+
+        $validate = $request->validated();
+        $violation->update($validate);
+        return response()->json(
+            [
+                'message' => 'Success validate data',
+                'data' => $violation->is_confirm
             ]
         );
     }

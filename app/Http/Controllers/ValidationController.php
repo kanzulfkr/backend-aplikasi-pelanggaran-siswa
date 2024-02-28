@@ -20,7 +20,7 @@ class ValidationController extends Controller
             ->join('teachers', 'violations.officer_id', '=', 'teachers.id')
             ->join('users as student', 'students.user_id', '=', 'student.id')
             ->join('users as officer', 'teachers.user_id', '=', 'officer.id')
-            ->select('violations.id', 'violations.violations_types_id', 'students.nisn', 'violations.student_id', 'violations.officer_id', 'violations.is_validate', 'student.name as student_name', 'officer.name as office_name', 'violations_types.name as violation_name', 'violations_types.point', 'violations.catatan')
+            ->select('violations.id', 'violations.violations_types_id', 'students.nisn', 'violations.student_id', 'violations.officer_id', 'violations.is_validate', 'violations.is_confirm', 'student.name as student_name', 'officer.name as office_name', 'violations_types.name as violation_name', 'violations_types.point', 'violations.catatan')
             ->when($keyword, function ($query) use ($keyword) {
                 $query->where('student.name', 'like', '%' . $keyword . '%')
                     ->orWhere('violations_types.name', 'like', '%' . $keyword . '%');

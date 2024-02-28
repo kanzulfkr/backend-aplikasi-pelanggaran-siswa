@@ -25,7 +25,7 @@ class ViolationController extends Controller
             ->join('teachers', 'violations.officer_id', '=', 'teachers.id')
             ->join('users as student', 'students.user_id', '=', 'student.id')
             ->join('users as officer', 'teachers.user_id', '=', 'officer.id')
-            ->select('violations.id', 'violations.is_validate', 'student.name as student_name', 'students.nisn', 'officer.name as office_name', 'violations_types.name as violation_name', 'violations_types.point', 'violations.catatan', DB::raw('DATE_FORMAT(violations.created_at, "%d %M %Y") as created_at'))
+            ->select('violations.id', 'violations.is_validate', 'violations.is_confirm', 'student.name as student_name', 'students.nisn', 'officer.name as office_name', 'violations_types.name as violation_name', 'violations_types.point', 'violations.catatan', DB::raw('DATE_FORMAT(violations.created_at, "%d %M %Y") as created_at'))
             ->where('student.name', 'like', '%' . $keyword . '%')
             ->orWhere('violations_types.name', 'like', '%' . $keyword . '%')
             ->orderBy('id', 'desc')

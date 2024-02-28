@@ -21,6 +21,7 @@ class ViolationSeeder extends Seeder
                 'officer_id' => 7,
                 'catatan' => '',
                 'is_validate' => 0,
+                'is_confirm' => 0,
                 'created_at' => now()
             ],
             [
@@ -29,6 +30,7 @@ class ViolationSeeder extends Seeder
                 'officer_id' => 8,
                 'catatan' => '',
                 'is_validate' => 1,
+                'is_confirm' => 0,
                 'created_at' => now()
             ],
             [
@@ -37,6 +39,7 @@ class ViolationSeeder extends Seeder
                 'officer_id' => 9,
                 'catatan' => '',
                 'is_validate' => 0,
+                'is_confirm' => 0,
                 'created_at' => now()
             ],
             [
@@ -45,6 +48,7 @@ class ViolationSeeder extends Seeder
                 'officer_id' => 10,
                 'catatan' => '',
                 'is_validate' => 0,
+                'is_confirm' => 0,
                 'created_at' => now()
             ],
             [
@@ -53,6 +57,7 @@ class ViolationSeeder extends Seeder
                 'officer_id' => 11,
                 'catatan' => '',
                 'is_validate' => 0,
+                'is_confirm' => 0,
                 'created_at' => now()
             ],
             [
@@ -61,6 +66,7 @@ class ViolationSeeder extends Seeder
                 'officer_id' => 12,
                 'catatan' => '',
                 'is_validate' => 1,
+                'is_confirm' => 0,
                 'created_at' => now()
             ],
             [
@@ -69,6 +75,7 @@ class ViolationSeeder extends Seeder
                 'officer_id' => 13,
                 'catatan' => '',
                 'is_validate' => 1,
+                'is_confirm' => 0,
                 'created_at' => now()
             ],
             [
@@ -77,6 +84,7 @@ class ViolationSeeder extends Seeder
                 'officer_id' => 14,
                 'catatan' => '',
                 'is_validate' => 0,
+                'is_confirm' => 0,
                 'created_at' => now()
             ],
         ];

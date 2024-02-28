@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreViolationRequest extends FormRequest
+class UpdateConfirmationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,6 @@ class StoreViolationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'violations_types_id' => 'required|exists:violations_types,id',
-            'student_id' => 'required|exists:students,id',
-            'officer_id' => 'required|exists:teachers,id',
-            'catatan' => 'string|nullable',
-            'is_validate' => 'required|bool',
             'is_confirm' => 'required|bool',
         ];
     }

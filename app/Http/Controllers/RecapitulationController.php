@@ -32,6 +32,7 @@ class RecapitulationController extends Controller
                 'violations_types.point',
                 DB::raw('DATE_FORMAT(violations.created_at, "%d %M %Y") as created_at')
             )
+            ->where('is_validate', 'like', '1')
             ->get();
 
         $defaultClassId = DB::table('class_names')->orderBy('id')->value('id') ?? 1;
@@ -129,6 +130,8 @@ class RecapitulationController extends Controller
                 'violations_types.point',
                 DB::raw('DATE_FORMAT(violations.created_at, "%d %M %Y") as created_at')
             )
+            ->where('is_validate', 'like', '1')
+
             ->get();
 
         $defaultClassId = DB::table('class_names')->orderBy('id')->value('id') ?? 1;

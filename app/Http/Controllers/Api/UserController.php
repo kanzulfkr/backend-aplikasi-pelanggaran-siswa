@@ -93,15 +93,18 @@ class UserController extends Controller
                     'student.id as user_id',
                     'student.name as student_name',
                     'officer.name as officer_name',
+                    'officer.phone as officer_phone',
                     'students.nisn',
                     'violations_types.name as violations_types_name',
                     'violations_types.point',
                     'violations_types.type',
                     'violations.catatan',
                     'violations.is_validate',
+                    'violations.is_confirm',
                     'violations.created_at',
                 )
                 ->where('students.user_id', '=', $parentsStudentId)
+                ->where('is_validate', 'like', '1')
                 ->paginate(10);
         } else {
             $violations = DB::table('violations')
@@ -115,15 +118,18 @@ class UserController extends Controller
                     'student.id as user_id',
                     'student.name as student_name',
                     'officer.name as officer_name',
+                    'officer.phone as officer_phone',
                     'students.nisn',
                     'violations_types.name as violations_types_name',
                     'violations_types.point',
                     'violations_types.type',
                     'violations.catatan',
                     'violations.is_validate',
+                    'violations.is_confirm',
                     'violations.created_at',
                 )
                 ->where('students.user_id', '=', $user->id)
+                ->where('is_validate', 'like', '1')
                 ->paginate(10);
         }
 

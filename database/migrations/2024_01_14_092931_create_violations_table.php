@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('officer_id')->constrained('teachers');
             $table->string('catatan')->nullable();
             $table->boolean('is_validate');
+            $table->boolean('is_confirm');
             $table->timestamps();
         });
     }

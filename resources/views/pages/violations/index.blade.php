@@ -47,12 +47,13 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nama</th>
-                                            <th>Pelanggaran</th>
-                                            <th>Poin</th>
+                                            <th>Jenis Pelanggaran</th>
+                                            <!-- <th>Poin Pelanggaran</th> -->
                                             <th>Petugas</th>
                                             <th>Catatan</th>
                                             <th>Waktu</th>
                                             <th>Validasi</th>
+                                            <th>Konfirmasi Ortu</th>
                                             <th>
                                                 <div class="d-flex justify-content-center">
                                                     Action
@@ -66,15 +67,18 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $violation->student_name }}</td>
                                             <td>{{ $violation->violation_name }}</td>
-                                            <td>{{ $violation->point }}</td>
+                                            <!-- <td>{{ $violation->point }}</td> -->
                                             <td>{{ $violation->office_name }}</td>
                                             <td>{{ $violation->catatan == null ? '-' : $violation->catatan}}</td>
                                             <td>{{ $violation->created_at }}</td>
                                             <td>
-                                                <div class="badge badge-pill {{$violation->is_validate ? 'badge-success' : 'badge-warning' }}  mt-1 mb-1 mr-2">{{$violation->is_validate ? 'Validate' : 'Unvalidate' }}</div>
+                                                <div class="badge badge-pill {{$violation->is_validate ? 'badge-success' : 'badge-warning' }}  mt-1 mb-1 mr-2">{{$violation->is_validate ? 'Sudah divalidasi' : 'Belum divalidasi' }}</div>
                                             </td>
                                             <td>
-                                                @if (auth()->user()->roles == '1 ')
+                                                <div class="badge badge-pill {{$violation->is_confirm ? 'badge-success' : 'badge-warning' }}  mt-1 mb-1 mr-2">{{$violation->is_confirm ? 'Sudah dikonfirmasi' : 'Belum dikonfirmasi' }}</div>
+                                            </td>
+                                            <td>
+                                                @if (in_array(auth()->user()->roles, ['1', '2', '3']))
                                                 <div class="d-flex justify-content-center">
                                                     <a href="{{ route('violations.edit', $violation->id) }}" class="btn btn-primary btn-action mr-1">
                                                         <i class="fas fa-pencil-alt"></i>

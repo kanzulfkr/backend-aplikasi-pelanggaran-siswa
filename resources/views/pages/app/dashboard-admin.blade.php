@@ -12,9 +12,24 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Dashboard</h1>
+            <h1>Dashboard Admin</h1>
         </div>
         <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-primary">
+                        <i class="fas fa-file"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Pelanggaran</h4>
+                        </div>
+                        <div class="card-body">
+                            <h5>{{ $totalsData['violationTotal'] }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-danger">
@@ -22,7 +37,7 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Data Siswa</h4>
+                            <h4>Total Siswa</h4>
                         </div>
                         <div class="card-body">
                             <h5>{{ $totalsData['studentTotal'] }}</h5>
@@ -37,7 +52,7 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Data Pelanggaran Ter-Validasi</h4>
+                            <h4>Pelanggaran Sudah di Validasi</h4>
                         </div>
                         <div class="card-body">
                             <h5>{{ $totalsData['violationValidate'] }}</h5>
@@ -48,29 +63,14 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-warning">
-                        <i class="far fa-user"></i>
+                        <i class="far fa-file"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Data Pelanggaran Belum Validasi</h4>
+                            <h4>Pelanggaran Belum di Validasi</h4>
                         </div>
                         <div class="card-body">
                             <h5>{{ $totalsData['violationUnValidate'] }}</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-primary">
-                        <i class="fas fa-file"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Data Pelanggaran</h4>
-                        </div>
-                        <div class="card-body">
-                            <h5>{{ $totalsData['violationTotal'] }}</h5>
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                         @endforelse
                         <div class="pt-1 pb-1 text-center">
                             <a href="{{route('validation.index')}}" class="btn btn-primary btn-lg btn-round">
-                                Validasi Sekarang !
+                                Lihat data !
                             </a>
                         </div>
                     </div>
@@ -132,7 +132,6 @@
                                     $maxPoints = 40;
                                     $progressPercentage = min($userProgress['total_points'] * 100 / $maxPoints, 100);
                                     $isMaxPoints = $userProgress['total_points'] >= $maxPoints;
-
                                     if ($progressPercentage >= 100) {
                                     $barColorClass = 'bg-danger';
                                     } elseif ($progressPercentage >= 50) {
@@ -140,8 +139,6 @@
                                     } else {
                                     $barColorClass='bg-primary' ;
                                     }
-
-
                                     @endphp
                                     <div class="progress-text">{{ $userProgress['total_points'] }}</div>
                                     <div class="progress" data-height="6">
@@ -156,11 +153,62 @@
                             @empty
                             <!-- Handle the case when $usersProgress is empty -->
                             @endforelse
-
                         </ul>
                     </div>
                 </div>
             </div>
+            <!-- <div class="col-lg-7 col-md-12 col-12 col-sm-12">
+                <div class="card card-hero">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="far fa-question-circle"></i>
+                        </div>
+                        <h4>14</h4>
+                        <div class="card-description">Pelanggaran membutuhkan validasi dari anda!</div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="tickets-list">
+                            <a href="#" class="ticket-item">
+                                <div class="ticket-title">
+                                    <h4>My order hasn't arrived yet</h4>
+                                </div>
+                                <div class="ticket-info">
+                                    <div>Laila Tazkiah</div>
+                                    <div class="bullet"></div>
+                                    <div class="text-primary">1 min ago</div>
+                                </div>
+                            </a>
+                            <div class="card-body">
+
+                                @forelse ($recentViolations as $recentViolation)
+                                <ul class="list-unstyled list-unstyled-border">
+                                    <li class="media">
+                                        <img class="rounded-circle mr-3" width="50" src="{{ asset('img/avatar/' . ($loop->iteration  % 2 === 1 ? 'avatar-1.png' : 'avatar-4.png')) }}" alt="avatar">
+                                        <div class="media-body">
+                                            <div class="text-primary text-small ml-3 float-right">
+                                                {{ $recentViolation->created_at->locale('id')->diffForHumans(); }}
+                                            </div>
+                                            <div class="media-title">
+
+                                                {{ $recentViolation->student->user->name }}
+                                                <span class="text-muted" style="font-weight: normal;"> mendapatkan pelanggaran baru.</span>
+                                            </div>
+                                            <div class="text-small">
+                                                ditambahkan oleh <span class="text-muted" style="font-weight: 600;"> {{ $recentViolation->officer->user->name }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                @empty
+                                @endforelse
+                            </div>
+                            <a href="{{route('validation.index')}}" class="ticket-item ticket-more">
+                                Validasi Sekarang! <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
         </div>
     </section>
 </div>

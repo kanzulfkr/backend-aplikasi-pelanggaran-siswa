@@ -67,37 +67,38 @@ class UserController extends Controller
         $user->delete();
         return redirect(route('user.index'))->with('success', 'Delete User Successfully');
     }
-    public function dashboard()
-    {
-        $studentTotal = Student::all()->count();
-        $teacherTotal = Teacher::all()->count();
-        $violationTotal = Violation::all()->count();
-        $violationValidate = Violation::where('is_validate', '=', 1)->count();
-        $violationUnValidate = Violation::where('is_validate', '=', 0)->count();
-        $totalsData = [
-            'teacherTotal' => $teacherTotal,
-            'studentTotal' => $studentTotal,
-            'violationTotal' => $violationTotal,
-            'violationValidate' => $violationValidate,
-            'violationUnValidate' => $violationUnValidate,
-        ];
 
-        $recentViolations  = Violation::orderBy('id', 'desc')->take(6)->get();
-        $violationProgress = Violation::orderBy('id', 'desc')->get();
-        $usersProgress = [];
-        foreach ($violationProgress as $violation) {
-            $studentId = $violation->student_id;
-            if (!isset($usersProgress[$studentId])) {
-                $usersProgress[$studentId] = [
-                    'student_id' => $studentId,
-                    'name' => $violation->student->user->name,
-                    'gender' => $violation->student->gender,
-                    'nisn' => $violation->student->nisn,
-                    'total_points' => 0,
-                ];
-            }
-            $usersProgress[$studentId]['total_points'] += $violation->violationsType->point;
-        }
-        return view('pages.app.dashboard', compact('totalsData', 'usersProgress', 'recentViolations'));
-    }
+    // public function dashboard()
+    // {
+    //     $studentTotal = Student::all()->count();
+    //     $teacherTotal = Teacher::all()->count();
+    //     $violationTotal = Violation::all()->count();
+    //     $violationValidate = Violation::where('is_validate', '=', 1)->count();
+    //     $violationUnValidate = Violation::where('is_validate', '=', 0)->count();
+    //     $totalsData = [
+    //         'teacherTotal' => $teacherTotal,
+    //         'studentTotal' => $studentTotal,
+    //         'violationTotal' => $violationTotal,
+    //         'violationValidate' => $violationValidate,
+    //         'violationUnValidate' => $violationUnValidate,
+    //     ];
+
+    //     $recentViolations  = Violation::orderBy('id', 'desc')->take(6)->get();
+    //     $violationProgress = Violation::orderBy('id', 'desc')->get();
+    //     $usersProgress = [];
+    //     foreach ($violationProgress as $violation) {
+    //         $studentId = $violation->student_id;
+    //         if (!isset($usersProgress[$studentId])) {
+    //             $usersProgress[$studentId] = [
+    //                 'student_id' => $studentId,
+    //                 'name' => $violation->student->user->name,
+    //                 'gender' => $violation->student->gender,
+    //                 'nisn' => $violation->student->nisn,
+    //                 'total_points' => 0,
+    //             ];
+    //         }
+    //         $usersProgress[$studentId]['total_points'] += $violation->violationsType->point;
+    //     }
+    //     return view('pages.app.dashboard', compact('totalsData', 'usersProgress', 'recentViolations'));
+    // }
 }

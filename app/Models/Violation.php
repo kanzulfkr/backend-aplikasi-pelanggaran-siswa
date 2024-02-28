@@ -15,6 +15,7 @@ class Violation extends Model
         'officer_id',
         'catatan',
         'is_validate',
+        'is_confirm',
         'created_at' => 'datetime',
     ];
 

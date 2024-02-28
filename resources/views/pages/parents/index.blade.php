@@ -22,12 +22,15 @@
             @include('layouts.alert')
             <div class="row mt-4">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card" {{ $role = auth()->user()->roles }}>
                         <div class="card-header">
                             <h4>All Wali Murid</h4>
+                            @if ($role == '1')
                             <div class="section-header-button">
                                 <a href="{{ route('parents.create') }}" class="btn btn-primary">Add New</a>
                             </div>
+                            @else
+                            @endif
                         </div>
                         <div class="card-body">
                             <div class="float-right">
@@ -52,11 +55,14 @@
                                         <th>Gender</th>
                                         <th>Phone</th>
                                         <th>Alamat</th>
+                                        @if ($role == '1')
                                         <th>
                                             <div class="d-flex justify-content-center">
                                                 Action
                                             </div>
                                         </th>
+                                        @else
+                                        @endif
                                     </tr>
                                     @forelse ($parents as $parent)
                                     <tr>
@@ -82,6 +88,7 @@
                                         <td>
                                             {{ $parent->address }}
                                         </td>
+                                        @if ($role == '1')
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <a href="{{ route('parents.edit', $parent->id) }}" class="btn btn-primary btn-action mr-1">
@@ -96,6 +103,8 @@
                                                 </form>
                                             </div>
                                         </td>
+                                        @else
+                                        @endif
                                     </tr>
                                     @empty
                                     <tr>

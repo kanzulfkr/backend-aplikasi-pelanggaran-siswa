@@ -74,7 +74,7 @@
                                             <td>{{ $violation->office_name }}</td>
                                             <td>{{ $violation->catatan == null ? '-' : $violation->catatan}}</td>
                                             <td>
-                                                <div class="badge badge-pill {{$violation->is_validate ? 'badge-success' : 'badge-warning' }} ">{{$violation->is_validate ? 'Validate' : 'Unvalidate' }}</div>
+                                                <div class="badge badge-pill {{$violation->is_validate ? 'badge-success' : 'badge-warning' }} ">{{$violation->is_validate ? 'Sudah tervalidasi' : 'Belum tervalidasi' }}</div>
                                             </td>
                                             <td>
                                                 <form action="{{ route('violations.update', $violation->id) }}" method="POST">

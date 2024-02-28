@@ -91,6 +91,7 @@
                             </div>
                         </div>
                         <input type="hidden" class="form-control" name="is_validate" value="0">
+                        <input type="hidden" class="form-control" name="is_confirm" value="0">
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">Submit</button>

@@ -22,11 +22,14 @@
             @include('layouts.alert')
             <div class="row mt-4">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card" {{ $role = auth()->user()->roles }}>
                         <div class="card-header">
                             <h4>All Jenis Pelanggaran</h4>
                             <div class="section-header-button">
-                                <a href="{{ route('violations-types.create') }}" class="btn btn-primary">Add New</a>
+                                @if ($role == '5' || $role == '4')
+                                @else
+                                <a href="{{ route('violations-types.create') }}" class="btn btn-primary deactive">Add New</a>
+                                @endif
                             </div>
                         </div>
                         <div class="card-body">
@@ -64,6 +67,11 @@
                                             <td>{{ $violationsType->point }}</td>
                                             <td>{{ $violationsType->type }}</td>
                                             <td>
+                                                @if ($role == '5' || $role == '4')
+                                                <div class="d-flex justify-content-center">
+                                                    -
+                                                </div>
+                                                @else
                                                 <div class="d-flex justify-content-center">
                                                     <a href="{{ route('violations-types.edit', $violationsType->id) }}" class="btn btn-primary btn-action mr-1">
                                                         <i class="fas fa-pencil-alt"></i>
@@ -76,6 +84,7 @@
                                                         @method('DELETE')
                                                     </form>
                                                 </div>
+                                                @endif
                                             </td>
                                         </tr>
                                         @empty
