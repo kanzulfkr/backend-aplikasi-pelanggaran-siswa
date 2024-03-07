@@ -37,7 +37,7 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total Siswa</h4>
+                            <h4>Total siswa dengan data pelanggaran</h4>
                         </div>
                         <div class="card-body">
                             <h5>{{ $totalsData['studentTotal'] }}</h5>

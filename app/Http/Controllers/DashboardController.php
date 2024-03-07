@@ -29,14 +29,21 @@ class DashboardController extends Controller
         if ($lastYearViolations > 0)  $percentageIncreaseYear = (($thisYearVio - $lastYearViolations) / $lastYearViolations) * 100;
         $violationsByClass = DB::table('student_classes')->join('violations', 'student_classes.student_id', '=', 'violations.student_id')->join('class_names', 'class_names.id', '=', 'student_classes.class_name_id')->select('class_names.name', DB::raw('COUNT(*) as total_violations'))->where('is_validate', 'like', '1')->groupBy('student_classes.class_name_id', 'class_names.name')->get();
 
-        // source data general dashboard 
-        $studentTotal = Student::all()->count();
-        $teacherTotal = Teacher::all()->count();
+        // source data general dashboard  
         $violationTotal = Violation::all()->count();
+        $violations = DB::table('violations')->select('student_id')->get();
+        $studentUniques = [];
+        foreach ($violations as $record) {
+            $studentId = $record->student_id;
+            if (!in_array($studentId, $studentUniques)) {
+                $studentUniques[] = $studentId;
+            }
+        }
+        $studentTotal = count($studentUniques);
+
         $violationValidate = Violation::where('is_validate', '=', 1)->count();
         $violationUnValidate = Violation::where('is_validate', '=', 0)->count();
         $totalsData = [
-            'teacherTotal' => $teacherTotal,
             'studentTotal' => $studentTotal,
             'violationTotal' => $violationTotal,
             'violationValidate' => $violationValidate,

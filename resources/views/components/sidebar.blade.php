@@ -29,8 +29,14 @@
             </li>
             @if ($role == '4'|| $role == '5')
             @else
-            <li class="nav-item dropdown ">
-                <a href="{{ route('validation.index') }}" class=" nav-link "><i class="fas fa-file"></i><span class="beep">Validasi Pelanggaran</span></a>
+            <li class="nav-item dropdown">
+                <a href="{{ route('validation.index') }}" class="nav-link">
+                    <i class="fas fa-file"></i>
+                    <span>Validasi Pelanggaran</span>
+                    @if(violationsUnvalidated() != null)
+                    <sup class="blink" style="color: orange;">{{ violationsUnvalidated() }}</sup>
+                    @endif
+                </a>
             </li>
             @endif
             <li class="nav-item dropdown ">
